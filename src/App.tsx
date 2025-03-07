@@ -4,16 +4,22 @@ import Gallery from "./Pages/Gallery";
 import Contact from "./Pages/Contact";
 import App404 from "./Pages/App404";
 
-function Router() {
+function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}/>
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<Contact />} />
+      <Route index element={<Home />}/>
+
+      <Route path="gallery">
+        <Route index element={<Gallery />} />
+        <Route path=":id" element={<>g item</>} />
+      </Route>
+
+      
+      <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<App404 />} />
     </Routes>
   );
 }
 
-export default Router;
+export default App;
