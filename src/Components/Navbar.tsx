@@ -9,7 +9,6 @@ import {
   IconButton,
   Button,
   useMediaQuery,
-  useTheme,
   Typography,
 } from "@mui/material";
 import Sidebar from "./Sidebar";
@@ -22,7 +21,6 @@ const navItems = [
 ];
 
 const Navbar = () => { 
-  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const isMD = useMediaQuery(" (min-width: 600px) ");
@@ -53,7 +51,7 @@ const Navbar = () => {
                   minHeight: "inherit",
                 }}
               >
-                {navItems.map(({ text, path }, index) => {
+                {navItems.map(({ text, path }) => {
                   return (
                     <React.Fragment key={text}>
                       <Button
