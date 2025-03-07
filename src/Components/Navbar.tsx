@@ -10,12 +10,12 @@ import {
   Button,
   useMediaQuery,
   useTheme,
+  Typography,
 } from "@mui/material";
 import Sidebar from "./Sidebar";
-import SocialLinks from "./SocialLinks";
+import InstagramButton from "./InstagramButton";
 
 const navItems = [
-  { text: "Home", path: "/" },
   { text: "About", path: "/about" },
   { text: "Gallery", path: "/gallery" },
   { text: "Contact", path: "/contact" },
@@ -25,7 +25,7 @@ const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const isMD = useMediaQuery(" (min-width: 950px) ");
+  const isMD = useMediaQuery(" (min-width: 600px) ");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   const handleSidebar = () => {
@@ -35,8 +35,9 @@ const Navbar = () => {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "50px" }}>
       <CssBaseline />
-      <AppBar sx={{ bgcolor: "brand.secondary", boxShadow: 0 }}>
+      <AppBar sx={{ bgcolor: "common.black", boxShadow: 0 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
+        {isMD && <Typography variant="h5">Contra Galleries</Typography>}
           {isMD ? (
             <Box
               sx={{
@@ -56,20 +57,14 @@ const Navbar = () => {
                   return (
                     <React.Fragment key={text}>
                       <Button
-                        onClick={() => 
-                          path.includes("https") ? 
-                          window.open(path, "_blank")
-                          : 
-                          navigate(path)
-                          }
+                        onClick={() => navigate(path)}
                         sx={{
                           color:
                             path === location.pathname
-                              ? "brand.particle"
-                              : "brand.primary",
+                              ? "grey.500"
+                              : "common.white",
                           borderRadius: 0,
                           marginLeft: 2,
-                          fontWeight: 700
                         }}
                       >
                         {text}
@@ -78,15 +73,16 @@ const Navbar = () => {
                   );
                 })}
               </Box>
+              <InstagramButton marginLeft={4} />
             </Box>
           ) : (
             <Box>
               <IconButton
                 sx={{
-                  color: "brand.primary",
                   maxWidth: "40px",
                   display: "flex",
                   justifyContent: "unset",
+                  color: "common.white"
                 }}
                 onClick={handleSidebar}
               >
@@ -97,14 +93,11 @@ const Navbar = () => {
                 setSidebarOpen={setSidebarOpen}
                 handleSidebar={handleSidebar}
                 navItems={navItems}
-                theme={theme}
                 location={location}
                 navigate={navigate}
               />
             </Box>
           )}
-          {!isMD && <Box sx={{ marginRight: 5 }} />}
-          {isMD && <SocialLinks /> }
         </Toolbar>
       </AppBar>
     </Box>
