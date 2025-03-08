@@ -63,7 +63,9 @@ const Sidebar: React.FC<SidebarProps> = ({
           <CloseIcon />
         </IconButton>
       </Box>
-      <InstagramButton marginLeft="0" />
+      <Box>  
+       <InstagramButton marginLeft={0} />
+      </Box>
       <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
         {navItems.map(({ text, path }) => (
           <Button

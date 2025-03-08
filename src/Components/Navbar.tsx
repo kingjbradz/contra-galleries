@@ -33,7 +33,7 @@ const staticNavItems: NavItem[] = [
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isMD = useMediaQuery("(min-width: 600px)");
+  const isMD = useMediaQuery("(min-width: 750px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   const { data: artists, isLoading } = useFeaturedArtistsData();
