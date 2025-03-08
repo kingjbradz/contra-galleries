@@ -76,10 +76,9 @@ const Contact = () => {
         <br />
         <StyledTextField
           multiline={true}
-          minRows={3}
+          minRows={is600 ? 10 : 5}
           id="message"
           name="message"
-          // color="outline"
           size="small"
           label={
             <label
