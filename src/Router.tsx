@@ -11,22 +11,39 @@ import GalleryItem from "./Pages/GalleryItem";
 
 interface Artist {
   name: string;
-  id: string;
+  image: string;
+  info: string;
+  artworks: Array<any>;
 }
 
 function Router() {
-  const { data: artists, isLoading } = useFeaturedArtistsData();
+  const { data, isLoading } = useFeaturedArtistsData();
+  const artists: Artist[] = data ?? [];
 
   if (isLoading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexGrow: 1,
+        }}
+      >
         <CircularProgress sx={{ color: "common.black" }} />
       </Box>
     );
   }
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexGrow: 1,
+      }}
+    >
       <Routes>
         <Route index element={<Home />} />
         <Route path="gallery">
@@ -34,15 +51,11 @@ function Router() {
           <Route path=":id" element={<GalleryItem />} />
         </Route>
 
-        {/* Dynamically generate featured artist routes */}
-        {artists?.map((artist: Artist) => (
-          <Route
-            key={artist.id}
-            path={`/${artist.name.replace(/\s+/g, "")}`}
-          >
+        {artists?.map((artist: Artist, index: any) => (
+          <Route key={index} path={`/${artist.name.replace(/\s+/g, "")}`}>
             <Route index element={<FeaturedArtistPage artist={artist} />} />
             <Route path=":id" element={<FeaturedArtistItem />} />
-            </Route>
+          </Route>
         ))}
 
         <Route path="/contact" element={<Contact />} />
