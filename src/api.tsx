@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const featuredArtistsUrl = "https://api.npoint.io/c86f82cf3737f0456f8c";
+const featuredArtistsUrl = import.meta.env.VITE_FEATURED_ARTISTS_URL
 
 const fetchFeaturedArtistsData = async () => {
     const response = await fetch(featuredArtistsUrl);
@@ -18,7 +18,7 @@ export const useFeaturedArtistsData = () => {
     });
 };
 
-const generalGalleryUrl = "https://api.npoint.io/398ada7cdc7f267d4846";
+const generalGalleryUrl = import.meta.env.VITE_GENERAL_GALLERY_URL
 
 const fetchGeneralGalleryData = async () => {
     const response = await fetch(generalGalleryUrl);
@@ -35,3 +35,5 @@ export const useGeneralGalleryData = () => {
         refetchOnWindowFocus: false, // Prevent unnecessary refetches
     });
 };
+
+const privateGalleryUrl = import.meta.env.VITE_PRIVATE_GALLERY_URL
