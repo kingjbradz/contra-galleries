@@ -1,0 +1,1 @@
+declare module '@fontsource/zen-kaku-gothic-antique';

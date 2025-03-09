@@ -1,9 +1,13 @@
+import { Box, Typography } from "@mui/material";
+import { Link } from "react-router";
+
 const App404 = () => {
   return (
-    <div>
-      <h1>404</h1>
-      <p>Page not found</p>
-    </div>
+    <Box sx={{ textAlign: "center" }}>
+      <Typography variant="h5">This page doesn't exist.</Typography>
+      <br />
+      <Typography>Back to <Link to="/">Home</Link>.</Typography>
+    </Box>
   );
 }
 

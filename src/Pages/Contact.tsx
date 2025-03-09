@@ -36,7 +36,6 @@ const Contact = () => {
           id="name"
           type="name"
           name="name"
-          // color="outline"
           size="small"
           label={
             <label
@@ -57,7 +56,6 @@ const Contact = () => {
           id="email"
           type="email"
           name="email"
-          // color="outline"
           size="small"
           label={
             <label
