@@ -14,11 +14,11 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
-      <Navbar />
-      <Router />
-      <Footer />
-    </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
+        <Navbar />
+        <Router />
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 }
