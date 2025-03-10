@@ -1,7 +1,8 @@
 // @ts-ignore
 import "@fontsource/zen-kaku-gothic-antique"
 import Box from "@mui/material/Box";
-import Navbar from "./Components/Navbar";
+// @ts-ignore
+import NavbarCont from "./Components/NavbarCont";
 import Footer from "./Components/Footer";
 import Router from "./Router";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -16,7 +17,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
-        <Navbar />
+        <NavbarCont />
         <Router />
         <Footer />
       </Box>
