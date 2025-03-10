@@ -37,3 +37,19 @@ export const useGeneralGalleryData = () => {
 };
 
 const privateGalleryUrl = import.meta.env.VITE_PRIVATE_GALLERY_URL
+
+const fetchPrivateGalleryData = async () => {
+    const response = await fetch(privateGalleryUrl);
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    return response.json();
+};
+
+export const usePrivateGalleryData = () => {
+    return useQuery({
+        queryKey: ["privateGallery"],
+        queryFn: fetchPrivateGalleryData,
+        refetchOnWindowFocus: false, // Prevent unnecessary refetches
+    });
+};
