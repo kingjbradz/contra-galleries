@@ -1,9 +1,13 @@
+import { Box } from "@mui/material"
+
 const CarouselGallery = () => {
+
     return (
-        <>
-        carousel gallery
-        </>
+        <Box>
+          
+        </Box>
     )
 }
 
 export default CarouselGallery
+

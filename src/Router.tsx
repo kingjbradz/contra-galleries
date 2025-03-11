@@ -4,8 +4,9 @@ import { useFeaturedArtistsData } from "./api";
 import Home from "./Pages/Home";
 import Gallery from "./Pages/Gallery";
 import GalleryItem from "./Pages/GalleryItem";
-import CarouselGallery from "./Pages/CarouselGallery";
+import CarouselGalleryCont from "./Pages/CarouselGalleryCont";
 import CarouselGalleryItem from "./Pages/CarouselGalleryItem";
+import ArtworkDetail from "./Pages/ArtworkDetail";
 import Contact from "./Pages/Contact";
 import App404 from "./Pages/App404";
 import FeaturedArtistPage from "./Pages/FeaturedArtistPage";
@@ -30,6 +31,7 @@ function Router() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "column",
           flexGrow: 1,
         }}
       >
@@ -45,10 +47,10 @@ function Router() {
         justifyContent: "center",
         alignItems: "center",
         flexGrow: 1,
+        height: import.meta.env.VITE_BRANCH !== "dev" ? "100%" : "1px"
       }}
     >
-      {import.meta.env.VITE_BRANCH !== "dev"  
-      // || import.meta.env.VITE_BRANCH !== "main" 
+      {import.meta.env.VITE_BRANCH === "dev"  || import.meta.env.VITE_BRANCH === "main" 
       ? (
         <Routes>
           <Route index element={<Home />} />
@@ -69,11 +71,9 @@ function Router() {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/">
-            <Route index element={<CarouselGallery />} />
-            <Route path="/:id" element={<CarouselGalleryItem />} />
-            <Route path="/*" element={<App404 />} />
-          </Route>
+          <Route path="/" element={<CarouselGalleryCont />} />
+          <Route path="/:id" element={<CarouselGalleryCont />} />
+          <Route path="/*" element={<App404 />} />
         </Routes>
       )}
     </Box>

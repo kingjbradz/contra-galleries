@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
   const navItems: NavItem[] = [...artistNavItems, ...staticNavItems];
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "50px" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "64px" }}>
       <CssBaseline />
       <AppBar sx={{ bgcolor: "common.black", boxShadow: 0 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>

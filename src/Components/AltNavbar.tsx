@@ -21,7 +21,7 @@ const AltNavbar: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         flexShrink: "0",
-        height: "50px",
+        height: "64px",
       }}
     >
       <CssBaseline />
