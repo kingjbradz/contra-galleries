@@ -55,11 +55,11 @@ const Navbar: React.FC = () => {
   const navItems: NavItem[] = [...artistNavItems, ...staticNavItems];
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "50px" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "64px" }}>
       <CssBaseline />
       <AppBar sx={{ bgcolor: "common.black", boxShadow: 0 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {isMD && <Typography variant="h5">Contra Galleries</Typography>}
+          {isMD && <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>Contra Galleries</Typography>}
           {isMD ? (
             <Box sx={{ display: "flex", alignItems: "center", minHeight: "inherit" }}>
               <Box sx={{ display: { xs: "none", sm: "flex" }, marginLeft: 1, minHeight: "inherit" }}>
