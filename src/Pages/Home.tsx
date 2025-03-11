@@ -1,8 +1,18 @@
+import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router";
+
 const Home = () => {
+    const navigate = useNavigate();
     return (
-        <div>
-        <h1>Home</h1>
-        </div>
+        <Box 
+        onClick={() => navigate("/gallery")}
+        sx={{
+            cursor: "pointer"
+        }}>
+            <Typography variant="h1">
+                Contra Galleries
+            </Typography>
+        </Box>
     );
 }
 
