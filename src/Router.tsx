@@ -47,7 +47,7 @@ function Router() {
         justifyContent: "center",
         alignItems: "center",
         flexGrow: 1,
-        height: import.meta.env.VITE_BRANCH !== "dev" ? "100%" : "1px"
+        height: import.meta.env.VITE_BRANCH === "dev" || import.meta.env.VITE_BRANCH === "main" ? "100%" : "1px"
       }}
     >
       {import.meta.env.VITE_BRANCH === "dev"  || import.meta.env.VITE_BRANCH === "main" 
