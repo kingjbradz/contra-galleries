@@ -1,6 +1,6 @@
 //@ts-ignore
 import Slider from "react-slick";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CircularProgress, Box, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import { usePrivateGalleryData } from "../api";
