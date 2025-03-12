@@ -9,7 +9,7 @@ import {
   IconButton,
   Button,
   useMediaQuery,
-  Typography,
+  Typography
 } from "@mui/material";
 import Sidebar from "./Sidebar";
 import InstagramButton from "./InstagramButton";
@@ -33,7 +33,7 @@ const staticNavItems: NavItem[] = [
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isMD = useMediaQuery("(min-width: 750px)");
+  const isMD = useMediaQuery("(min-width: 900px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   const { data: artists, isLoading } = useFeaturedArtistsData();
