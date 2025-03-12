@@ -107,7 +107,7 @@ const CarouselGalleryCont = () => {
         flexGrow: 1,
         height: "80%",
         position: "absolute",
-        width: "100%",
+        width: "90%",
         "& .slick-slider, & .slick-list, & .slick-track": {
           height: "100%",
         },
