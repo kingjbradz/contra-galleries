@@ -22,6 +22,7 @@ const CarouselGalleryCont = () => {
     year: string;
     info: string;
     material: string;
+    price: string;
   }
 
   const artworks: Artwork[] = (data as Artwork[]) ?? [];
@@ -138,6 +139,7 @@ const CarouselGalleryCont = () => {
               <Typography sx={{ fontStyle: "italic" }} marginBottom={1}>{artwork.title}, {artwork.year}</Typography>
               <Typography marginBottom={1}>{artwork.material}</Typography>
               <Typography marginBottom={1}>{artwork.info}</Typography>
+              <Typography marginBottom={1}>{artwork.price}</Typography>
             </Box>
           </Box>
         ))}
