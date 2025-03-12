@@ -7,7 +7,8 @@ const Home = () => {
         <Box 
         onClick={() => navigate("/gallery")}
         sx={{
-            cursor: "pointer"
+            cursor: "pointer",
+            textAlign: "center"
         }}>
             <Typography variant="h1">
                 Contra Galleries
