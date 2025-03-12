@@ -61,7 +61,8 @@ const CarouselGalleryCont = () => {
       return (
         <div
           style={{
-            padding: "0 8px", // This creates a 16px gap (8px on each side)
+            padding: "0 8px",
+            
           }}
         >
           <a>
@@ -69,11 +70,11 @@ const CarouselGalleryCont = () => {
               src={artworks[i]?.image} // Use artwork thumbnail
               alt={`Thumbnail ${i + 1}`}
               style={{
-                width: "50px",
-                height: "50px",
+                height: "25px",
+                width: "25px",
                 objectFit: "cover",
                 marginRight: "8px",
-                borderRadius: "4px",
+                borderRadius: "16px",
                 border: i === activeIndex ? "2px solid black" : "none", // Highlight active thumbnail
               }}
             />
@@ -104,8 +105,8 @@ const CarouselGalleryCont = () => {
       sx={{
         paddingTop: 1,
         flexGrow: 1,
-        height: "100%",
-        position: "relative",
+        height: "80%",
+        position: "absolute",
         width: "100%",
         "& .slick-slider, & .slick-list, & .slick-track": {
           height: "100%",

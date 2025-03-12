@@ -48,14 +48,14 @@ function Router() {
         alignItems: "center",
         flexGrow: 1,
         height: "100%",
-        // height: import.meta.env.VITE_BRANCH !== "dev" 
+        // height: import.meta.env.VITE_BRANCH === "dev" 
         // // || import.meta.env.VITE_BRANCH === "main" 
         // ? 
         // "100%" : "1px"
       }}
     >
-      {import.meta.env.VITE_BRANCH !== "dev" 
-      //  || import.meta.env.VITE_BRANCH === "main" 
+      {import.meta.env.VITE_BRANCH === "dev" 
+       || import.meta.env.VITE_BRANCH === "main" 
       ? (
         <Routes>
           <Route index element={<Home />} />

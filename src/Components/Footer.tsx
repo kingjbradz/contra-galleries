@@ -7,7 +7,9 @@ const Footer = () => {
         return new Date().getFullYear();
       }
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", marginBottom: 1 }}>
+    <Box sx={{ display:
+    //  import.meta.env.VITE_BRANCH == "dev" ? "none" : 
+     "flex"  , justifyContent: "center", flexShrink: "0", marginBottom: 1 }}>
         <Typography fontSize={isMD ? "12px" : "8px"}>© Contra Galleries, 2010 - {getCurrentYear()}</Typography>
     </Box>
   );
