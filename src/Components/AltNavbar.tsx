@@ -12,7 +12,7 @@ import {
 import InstagramButton from "./InstagramButton";
 
 const AltNavbar: React.FC = () => {
-  const isMD = useMediaQuery("(min-width: 750px)");
+  const isMD = useMediaQuery("(min-width: 900px)");
 
 
   return (

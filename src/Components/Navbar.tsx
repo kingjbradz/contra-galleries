@@ -9,7 +9,7 @@ import {
   IconButton,
   Button,
   useMediaQuery,
-  Typography,
+  Typography
 } from "@mui/material";
 import Sidebar from "./Sidebar";
 import InstagramButton from "./InstagramButton";
@@ -33,7 +33,7 @@ const staticNavItems: NavItem[] = [
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isMD = useMediaQuery("(min-width: 750px)");
+  const isMD = useMediaQuery("(min-width: 900px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   const { data: artists, isLoading } = useFeaturedArtistsData();
@@ -58,10 +58,11 @@ const Navbar: React.FC = () => {
     <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "64px" }}>
       <CssBaseline />
       <AppBar sx={{ bgcolor: "common.black", boxShadow: 0 }}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          {isMD && <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>Contra Galleries</Typography>}
+        <Toolbar>
+          {/* <Typography>{isMD ? `I am over MD: ${window.innerWidth}` : `I am under MD: ${window.innerWidth}` }</Typography> */}
           {isMD ? (
-            <Box sx={{ display: "flex", alignItems: "center", minHeight: "inherit" }}>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: '100%', minHeight: "inherit" }}>
+              <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>Contra Galleries</Typography>
               <Box sx={{ display: { xs: "none", sm: "flex" }, marginLeft: 1, minHeight: "inherit" }}>
                 {isLoading ? (
                   ""
@@ -80,22 +81,22 @@ const Navbar: React.FC = () => {
                     </Button>
                   ))
                 )}
+                <InstagramButton marginLeft={4} />
               </Box>
-              <InstagramButton marginLeft={4} />
             </Box>
           ) : (
-            <Box>
-              <IconButton
-                sx={{
-                  maxWidth: "40px",
-                  display: "flex",
-                  justifyContent: "unset",
-                  color: "common.white",
-                }}
-                onClick={handleSidebar}
-              >
-                <MenuIcon />
-              </IconButton>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+                <IconButton
+                  sx={{
+                    maxWidth: "40px",
+                    color: "common.white",
+                  }}
+                  onClick={handleSidebar}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer", marginBottom: 1 }}>Contra Galleries</Typography>
+                <Box></Box>
               <Sidebar
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
