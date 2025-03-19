@@ -2,7 +2,6 @@ import React from "react";
 import { Location } from "react-router";
 import { Drawer, Button, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import InstagramButton from "./InstagramButton";
 
 interface NavItem {
   text: string;
