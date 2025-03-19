@@ -5,7 +5,7 @@ import { usePrivateGalleryData } from "../api";
 const ArtworkDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data, isLoading } = usePrivateGalleryData();
+  const { data, isLoading } = usePrivateGalleryData(null);
 
   if (isLoading) return <p>Loading...</p>;
 

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 // @ts-ignore
 import NavbarCont from "./Components/NavbarCont";
 import Footer from "./Components/Footer";
-import Router from "./Router";
+import Router from "./Router/Router";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 const theme = createTheme({
