@@ -6,6 +6,26 @@ import { useNavigate, useParams } from "react-router";
 import { usePrivateGalleryData } from "../api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import CarouselGalleryItem from "./CarouselGalleryItem";
+
+interface Artwork {
+  id: number;
+  artist: string;
+  title: string;
+  dimensions: string;
+  material: string;
+  cover: string;
+  year: string;
+  info: string;
+  signed: string;
+  price: string;
+  images: [];
+}
+
+interface Collection {
+  name: string;
+  artworks: Artwork[];
+}
 
 const CarouselGalleryCont = () => {
   const sliderRef = useRef<Slider | null>(null);
@@ -14,19 +34,9 @@ const CarouselGalleryCont = () => {
   const { data, isLoading } = usePrivateGalleryData();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  interface Artwork {
-    id: number;
-    title: string;
-    image: string;
-    artist: string;
-    year: string;
-    info: string;
-    material: string;
-    price: string;
-  }
-
-  const artworks: Artwork[] = (data as Artwork[]) ?? [];
-
+  const collection = data as Collection | null;
+  const artworks: Artwork[] = collection?.artworks ?? [];
+ 
   // Sync URL ID with Slider index
   useEffect(() => {
     if (id && artworks.length) {
@@ -68,7 +78,7 @@ const CarouselGalleryCont = () => {
         >
           <a>
             <img
-              src={artworks[i]?.image} // Use artwork thumbnail
+              src={artworks[i]?.cover} // Use artwork thumbnail
               alt={`Thumbnail ${i + 1}`}
               style={{
                 height: "25px",
@@ -104,9 +114,9 @@ const CarouselGalleryCont = () => {
     <Box
       className="slider-container"
       sx={{
-        paddingTop: 1,
         flexGrow: 1,
-        height: "80%",
+        textAlign: "center",
+        // height: "80%",
         position: "absolute",
         width: "90%",
         "& .slick-slider, & .slick-list, & .slick-track": {
@@ -117,31 +127,14 @@ const CarouselGalleryCont = () => {
         }
       }}
     >
+      <Typography 
+        variant="h4"
+        sx={{
+          marginBottom: 4
+      }}>{collection?.name}</Typography>
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
-          <Box
-            key={artwork.id}
-            sx={{
-              display: "flex !important",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <img
-              src={artwork.image}
-              alt={artwork.title}
-              style={{ maxWidth: "50%" }}
-            />
-            <Box sx={{ maxWidth: "75%", textAlign: "center" }}>
-              <Typography variant="h4" marginBottom={1}>{artwork.artist}</Typography>
-              <Typography sx={{ fontStyle: "italic" }} marginBottom={1}>{artwork.title}, {artwork.year}</Typography>
-              <Typography marginBottom={1}>{artwork.material}</Typography>
-              <Typography marginBottom={1}>{artwork.info}</Typography>
-              <Typography marginBottom={1}>{artwork.price}</Typography>
-            </Box>
-          </Box>
+          <CarouselGalleryItem artwork={artwork} />
         ))}
       </Slider>
     </Box>
