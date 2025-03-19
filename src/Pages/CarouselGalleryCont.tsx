@@ -1,3 +1,4 @@
+// carousel component
 //@ts-ignore
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
@@ -27,37 +28,59 @@ interface Collection {
   artworks: Artwork[];
 }
 
-const CarouselGalleryCont = () => {
+interface ArtistProp {
+  url: string;
+  name: string; // Assuming you might need the name as well
+  id: number;   // Assuming you might need the id as well
+}
+
+const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const { data, isLoading } = usePrivateGalleryData();
+  const { id: artworkIdFromParams } = useParams();
+  const { data, isLoading, refetch } = usePrivateGalleryData(artist?.url); // Pass artist.url to the hook
   const [activeIndex, setActiveIndex] = useState(0);
 
   const collection = data as Collection | null;
   const artworks: Artwork[] = collection?.artworks ?? [];
- 
+
   // Sync URL ID with Slider index
   useEffect(() => {
-    if (id && artworks.length) {
+    if (artworkIdFromParams && artworks.length) {
       const index = artworks.findIndex(
-        (artwork) => artwork.id.toString() === id
+        (artwork) => artwork.id.toString() === artworkIdFromParams
       );
       if (index !== -1) {
         setActiveIndex(index);
         sliderRef.current?.slickGoTo(index);
       }
     }
-  }, [id, artworks]);
+  }, [artworkIdFromParams, artworks]);
 
   // Handle slide change
   const handleSlideChange = (newIndex: number) => {
     setActiveIndex(newIndex);
     const newId = artworks[newIndex]?.id;
     if (newId) {
-      navigate(`/${newId}`);
+      // Extract the artist name from the URL
+      const artistName = location.pathname.split('/')[1];
+  
+      // Update the URL to reflect the new artwork ID
+      navigate(`/${artistName}/${newId}`, { replace: true });
     }
   };
+
+  // Refetch data when the artist prop changes
+  useEffect(() => {
+    if (artist?.url) {
+      refetch(); // Trigger a manual refetch with the new URL
+    }
+    // Optionally reset activeIndex when the artist changes
+    setActiveIndex(0);
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(0, false); // Go to the first slide without animation
+    }
+  }, [artist?.url, refetch]);
 
   const settings = {
     dots: true,
@@ -73,7 +96,6 @@ const CarouselGalleryCont = () => {
         <div
           style={{
             padding: "0 8px",
-            
           }}
         >
           <a>
@@ -102,6 +124,7 @@ const CarouselGalleryCont = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "column",
           flexGrow: 1,
         }}
       >
@@ -116,25 +139,22 @@ const CarouselGalleryCont = () => {
       sx={{
         flexGrow: 1,
         textAlign: "center",
-        // height: "80%",
         position: "absolute",
         width: "90%",
         "& .slick-slider, & .slick-list, & .slick-track": {
           height: "100%",
         },
         "& .slick-dots li": {
-          margin: "0 16px"
-        }
+          margin: "0 16px",
+        },
       }}
     >
-      <Typography 
-        variant="h4"
-        sx={{
-          marginBottom: 4
-      }}>{collection?.name}</Typography>
+      <Typography variant="h4" sx={{ marginBottom: 4 }}>
+        {collection?.name}
+      </Typography>
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
-          <CarouselGalleryItem artwork={artwork} />
+          <CarouselGalleryItem key={artwork.id} artwork={artwork} />
         ))}
       </Slider>
     </Box>
