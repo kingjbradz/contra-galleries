@@ -36,9 +36,7 @@ export const useGeneralGalleryData = () => {
     });
 };
 
-const privateGalleryUrl = import.meta.env.VITE_PRIVATE_GALLERY_URL
-
-const fetchPrivateGalleryData = async (url: string | undefined) => {
+const fetchPrivateGalleryData = async (url: string | null) => {
     if (!url) {
       return null; // Or throw an error, depending on your needs
     }
@@ -49,7 +47,7 @@ const fetchPrivateGalleryData = async (url: string | undefined) => {
     return response.json();
   };
   
-  export const usePrivateGalleryData = (url: string | undefined) => {
+  export const usePrivateGalleryData = (url: string | null) => {
     return useQuery({
       queryKey: ["privateGallery", url], // Include URL in the query key for better caching
       queryFn: () => fetchPrivateGalleryData(url),
