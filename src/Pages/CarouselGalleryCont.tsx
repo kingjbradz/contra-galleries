@@ -149,9 +149,9 @@ const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
         },
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 4 }}>
+      {collection?.name && <Typography variant="h4" sx={{ marginBottom: 4 }}>
         {collection?.name}
-      </Typography>
+      </Typography>}
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
           <CarouselGalleryItem key={artwork.id} artwork={artwork} />
