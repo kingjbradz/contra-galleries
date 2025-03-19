@@ -19,7 +19,7 @@ function App() {
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
         <NavbarCont />
         <Router />
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </ThemeProvider>
   );
