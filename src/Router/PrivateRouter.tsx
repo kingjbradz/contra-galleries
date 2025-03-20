@@ -36,7 +36,9 @@ function PrivateRouter() {
   }
   return (
     <Routes>
-      <Route index element={<></>} />
+      <Route path="/" element={<CarouselGalleryCont />} />
+      <Route path="/:id" element={<CarouselGalleryCont />} />
+
         {artists.length > 0 && artists.map((artist: PrivateArtist, index: any) => (
           <Route key={index} path={`/${artist.name.replace(/\s+/g, "").toLowerCase()}`}>
             <Route index element={<CarouselGalleryCont artist={artist} />} />
