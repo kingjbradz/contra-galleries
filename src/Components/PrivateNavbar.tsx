@@ -24,7 +24,7 @@ interface Artist {
 
 const staticNavItems: NavItem[] = [
   { text: "Main Website", path: "https://contragalleries.com" },
-  { text: "General Gallery", path: "/" },
+  { text: "General Gallery", path: "/1" },
 ];
 
 const Navbar: React.FC = () => {
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
       ? list.artists?.map((artist: Artist, index: any) => ({
           key: index,
           text: artist.name,
-          path: `/${artist.name.replace(/\s+/g, "").toLowerCase()}`, // Remove spaces for cleaner URLs
+          path: `/${artist.name.replace(/\s+/g, "").toLowerCase()}/1`, // Remove spaces for cleaner URLs
         }))
       : [];
 

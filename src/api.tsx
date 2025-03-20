@@ -36,10 +36,9 @@ export const useGeneralGalleryData = () => {
     });
 };
 
-const fetchPrivateGalleryData = async (url: string | null) => {
-    if (!url) {
-      return null; // Or throw an error, depending on your needs
-    }
+const privateGeneralGalleryUrl = import.meta.env.VITE_PRIVATE_GENERAL_GALLERY_URL
+
+const fetchPrivateGalleryData = async (url: string) => {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Network response was not ok for URL: ${url}`);
@@ -48,10 +47,12 @@ const fetchPrivateGalleryData = async (url: string | null) => {
   };
   
   export const usePrivateGalleryData = (url: string | null) => {
+    const targetUrl = url ?? privateGeneralGalleryUrl; // Fallback to general URL if no artist URL
+  
     return useQuery({
-      queryKey: ["privateGallery", url], // Include URL in the query key for better caching
-      queryFn: () => fetchPrivateGalleryData(url),
-      enabled: !!url, // Only run the query if the URL is available
+      queryKey: ["privateGallery", targetUrl], // Use the targetUrl, which can either be artist.url or general URL
+      queryFn: () => fetchPrivateGalleryData(targetUrl), // Fetch data based on the resolved URL
+      enabled: true, // Always run the query
       refetchOnWindowFocus: false, // Prevent unnecessary refetches
     });
   };
