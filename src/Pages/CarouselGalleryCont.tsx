@@ -34,11 +34,11 @@ interface ArtistProp {
   id: number;   // Assuming you might need the id as well
 }
 
-const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
+const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
   const { id: artworkIdFromParams } = useParams();
-  const { data, isLoading, refetch } = usePrivateGalleryData(artist?.url); // Pass artist.url to the hook
+  const { data, isLoading, refetch } = usePrivateGalleryData(artist?.url ?? null); // Pass artist.url to the hook
   const [activeIndex, setActiveIndex] = useState(0);
 
   const collection = data as Collection | null;
@@ -62,11 +62,18 @@ const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
     setActiveIndex(newIndex);
     const newId = artworks[newIndex]?.id;
     if (newId) {
-      // Extract the artist name from the URL
-      const artistName = location.pathname.split('/')[1];
   
-      // Update the URL to reflect the new artwork ID
-      navigate(`/${artistName}/${newId}`, { replace: true });
+      const artistName = artist?.name?.replace(/\s+/g, ""); // This would be the artist name if it exists
+  
+      if (artistName) {
+        // If an artist name exists, navigate to the artist's page and update the artwork ID
+        navigate(`/${artistName}/${newId}`, { replace: true });
+      } else {
+        // If no artist name exists (general gallery), just update the ID part of the URL
+        // This ensures you don't get into a situation where you end up with something like "/1/1"
+        console.log("i am running")
+        navigate(`/${newId}`, { replace: true });
+      }
     }
   };
 
@@ -80,7 +87,7 @@ const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(0, false); // Go to the first slide without animation
     }
-  }, [artist?.url, refetch]);
+  }, [artist, refetch]);
 
   const settings = {
     dots: true,
@@ -149,9 +156,9 @@ const CarouselGalleryCont = ({ artist }: { artist: ArtistProp }) => {
         },
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 4 }}>
+      {collection?.name && <Typography variant="h4" sx={{ marginBottom: 4 }}>
         {collection?.name}
-      </Typography>
+      </Typography>}
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
           <CarouselGalleryItem key={artwork.id} artwork={artwork} />

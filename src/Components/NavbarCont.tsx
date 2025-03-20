@@ -1,10 +1,10 @@
 import Navbar from "./Navbar"
-import AltNavbar from "./AltNavbar"
+import PrivateNavbar from "./PrivateNavbar"
 
 const NavbarCont = () => {
     return import.meta.env.VITE_BRANCH === "dev" || import.meta.env.VITE_BRANCH === "main"
      ? 
-    <Navbar /> : <AltNavbar />
+    <Navbar /> : <PrivateNavbar />
 }
 
 export default NavbarCont
