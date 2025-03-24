@@ -52,29 +52,29 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
           }}
         >
           {artwork.artist.length > 0 && (
-            <Typography variant="h4" marginBottom={1}>
+            <Typography variant="h4">
               {artwork.artist}
             </Typography>
           )}
           {artwork.title.length > 0 && 
-          <Typography sx={{ fontStyle: "italic" }} marginBottom={1}>
+          <Typography sx={{ fontStyle: "italic" }}>
             {artwork.title}
           </Typography>}
-          <Typography marginBottom={1}>
+          <Typography>
             {artwork.year}
           </Typography>
-          <Typography marginBottom={1}>{artwork.material}</Typography>
+          <Typography>{artwork.material}</Typography>
           {artwork.dimensions.length > 0 && (
-            <Typography marginBottom={1}>{artwork.dimensions}</Typography>
+            <Typography>{artwork.dimensions}</Typography>
           )}
           {artwork.signed.length > 0 && (
-            <Typography marginBottom={1}>{artwork.signed}</Typography>
+            <Typography>{artwork.signed}</Typography>
           )}
           {artwork.info.length > 0 && (
-            <Typography marginBottom={1}>{artwork.info}</Typography>
+            <Typography>{artwork.info}</Typography>
           )}
           {artwork.price.length > 0 && (
-            <Typography marginBottom={1}>{artwork.price}</Typography>
+            <Typography>{artwork.price}</Typography>
           )}
         </Box>
         {artwork.images.length > 0 ? 
