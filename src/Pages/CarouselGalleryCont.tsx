@@ -146,7 +146,7 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
       sx={{
         flexGrow: 1,
         textAlign: "center",
-        position: "absolute",
+        // position: "absolute",
         width: "90%",
         height: "75%",
         "& .slick-slider, & .slick-list, & .slick-track": {
@@ -157,7 +157,7 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
         },
       }}
     >
-      {collection?.name && <Typography variant="h4" sx={{ marginBottom: 4 }}>
+      {collection?.name && <Typography variant="h5" sx={{ marginBottom: 1 }}>
         {collection?.name}
       </Typography>}
       <Slider ref={sliderRef} {...settings}>
