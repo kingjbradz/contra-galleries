@@ -28,6 +28,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
   return (
     <Box
       key={artwork.id}
+      id="top"
       sx={{
         display: "flex !important",
         flexDirection: "column",
@@ -39,38 +40,49 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
       <img
         src={artwork.cover}
         alt={artwork.title}
-        style={{ maxWidth: "500px", maxHeight: "200px" }}
+        style={{ maxWidth: "500px", maxHeight: "400px" }}
       />
       <Box sx={{ maxWidth: "75%", textAlign: "center", marginTop: 1 }}>
-        {artwork.artist.length > 0 && (
-          <Typography variant="h4" marginBottom={1}>
-            {artwork.artist}
-          </Typography>
-        )}
-        {artwork.title.length > 0 && 
-        <Typography sx={{ fontStyle: "italic" }} marginBottom={1}>
-          {artwork.title}
-        </Typography>}
-        <Typography marginBottom={1}>
-          {artwork.year}
-        </Typography>
-        <Typography marginBottom={1}>{artwork.material}</Typography>
-        {artwork.dimensions.length > 0 && (
-          <Typography marginBottom={1}>{artwork.dimensions}</Typography>
-        )}
-        {artwork.signed.length > 0 && (
-          <Typography marginBottom={1}>{artwork.signed}</Typography>
-        )}
-        {artwork.info.length > 0 && (
-          <Typography marginBottom={1}>{artwork.info}</Typography>
-        )}
-        {artwork.price.length > 0 && (
-          <Typography marginBottom={1}>{artwork.price}</Typography>
-        )}
         <Box
           sx={{
             display: "flex",
-            height: "200px"
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          {artwork.artist.length > 0 && (
+            <Typography variant="h4" marginBottom={1}>
+              {artwork.artist}
+            </Typography>
+          )}
+          {artwork.title.length > 0 && 
+          <Typography sx={{ fontStyle: "italic" }} marginBottom={1}>
+            {artwork.title}
+          </Typography>}
+          <Typography marginBottom={1}>
+            {artwork.year}
+          </Typography>
+          <Typography marginBottom={1}>{artwork.material}</Typography>
+          {artwork.dimensions.length > 0 && (
+            <Typography marginBottom={1}>{artwork.dimensions}</Typography>
+          )}
+          {artwork.signed.length > 0 && (
+            <Typography marginBottom={1}>{artwork.signed}</Typography>
+          )}
+          {artwork.info.length > 0 && (
+            <Typography marginBottom={1}>{artwork.info}</Typography>
+          )}
+          {artwork.price.length > 0 && (
+            <Typography marginBottom={1}>{artwork.price}</Typography>
+          )}
+        </Box>
+        {artwork.images.length > 0 ? 
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center"
+            // height: "200px"
           }}
         >
           {artwork.images.map((i, index) => (
@@ -78,12 +90,15 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
               key={index}
               src={i}
               alt={`Image ${index}`}
-              style={{ maxWidth: "200px",
-                 margin: "8px 8px 32px 0",
-                 }}
+              style={{ 
+                // maxWidth: "200px",
+                height: "40px",
+                width: "40px",
+                margin: "8px 8px 32px 0",
+               }}
             />
           ))}
-        </Box>
+        </Box> : <br />}
       </Box>
     </Box>
   );

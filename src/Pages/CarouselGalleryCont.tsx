@@ -148,6 +148,7 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
         textAlign: "center",
         position: "absolute",
         width: "90%",
+        height: "75%",
         "& .slick-slider, & .slick-list, & .slick-track": {
           height: "100%",
         },
