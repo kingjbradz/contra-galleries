@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         flexShrink: "0",
-        height: "64px",
+        height: "72px",
       }}
     >
       <CssBaseline />
