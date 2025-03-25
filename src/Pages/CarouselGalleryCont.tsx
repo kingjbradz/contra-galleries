@@ -144,12 +144,15 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
     <Box
       className="slider-container"
       sx={{
-        flexGrow: 1,
         textAlign: "center",
-        // position: "absolute",
-        width: "90%",
-        height: "75%",
-        "& .slick-slider, & .slick-list, & .slick-track": {
+        position: "absolute",
+        paddingTop: 1,
+        width: "100%",
+        height: "90%",
+        // "& .slick-slider, & .slick-list, & .slick-track": {
+        //   height: "100%",
+        // },
+        "& .slick-slider, & .slick-list, & .slick-track, & .slick-slide": {
           height: "100%",
         },
         "& .slick-dots li": {

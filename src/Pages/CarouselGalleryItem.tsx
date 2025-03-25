@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 interface Artwork {
   id: number;
@@ -25,6 +25,8 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
     return <Typography variant="h6">No artwork selected</Typography>; // Handle undefined artwork safely
   }
 
+  const isMd = useMediaQuery("(min-width: 900px)")
+
   return (
     <Box
       key={artwork.id}
@@ -40,7 +42,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
       <img
         src={artwork.cover}
         alt={artwork.title}
-        style={{ maxWidth: "500px", maxHeight: "400px" }}
+        style={{ maxWidth: isMd  ? "500px" : "350px", maxHeight: "400px" }}
       />
       <Box sx={{ maxWidth: "75%", textAlign: "center", marginTop: 1 }}>
         <Box
