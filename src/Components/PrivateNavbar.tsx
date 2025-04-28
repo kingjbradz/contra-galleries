@@ -12,6 +12,7 @@ import {
 import PrivateSidebar from "./PrivateSidebar";
 import InstagramButton from "./InstagramButton";
 import { usePrivateArtistListData } from "../api";
+import { useGalleryName } from "./PrivateGalleryComponentName";
 
 interface NavItem {
   text: string;
@@ -28,6 +29,7 @@ const staticNavItems: NavItem[] = [
 ];
 
 const Navbar: React.FC = () => {
+  const { name } = useGalleryName()
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -37,14 +39,14 @@ const Navbar: React.FC = () => {
   const handleSidebar = () => {
     setSidebarOpen((current) => !current);
   };
-
+  
   // Create dynamic artist routes safely
   const artistNavItems: NavItem[] =
     !isLoading && list.artists?.length > 0
       ? list.artists?.map((artist: Artist, index: any) => ({
           key: index,
           text: artist.name,
-          path: `/${artist.name.replace(/\s+/g, "").toLowerCase()}/1`, // Remove spaces for cleaner URLs
+          path: `/${artist.name.replace(/\s+/g, "")}/1`,
         }))
       : [];
 
@@ -92,7 +94,7 @@ const Navbar: React.FC = () => {
               }}
             >
               <Typography variant="h5">Contra Galleries</Typography>
-              <Typography>Private</Typography>
+              <Typography>{name}</Typography>
             </Box>
             <Box>
               <InstagramButton marginLeft={4} />
