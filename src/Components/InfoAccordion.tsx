@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 interface InfoAccordionProps {
   title?: string | null;
-  content: React.FC | null;
+  content: React.ReactNode | null;
 }
 
 const InfoAccordion: React.FC<InfoAccordionProps> = ({ title, content }) => {
