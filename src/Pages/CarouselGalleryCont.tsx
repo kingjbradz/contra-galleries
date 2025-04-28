@@ -8,6 +8,9 @@ import { usePrivateGalleryData } from "../api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CarouselGalleryItem from "./CarouselGalleryItem";
+import { useLocation } from "react-router-dom"
+import { useGalleryName } from "../Components/PrivateGalleryComponentName";
+import LazyImage from "../Components/LazyImage";
 
 interface Artwork {
   id: number;
@@ -30,11 +33,12 @@ interface Collection {
 
 interface ArtistProp {
   url: string;
-  name: string; // Assuming you might need the name as well
-  id: number;   // Assuming you might need the id as well
+  name: string;
+  id: number;
 }
 
 const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
+  const { setName } = useGalleryName()
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
   const { id: artworkIdFromParams } = useParams();
@@ -71,7 +75,6 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
       } else {
         // If no artist name exists (general gallery), just update the ID part of the URL
         // This ensures you don't get into a situation where you end up with something like "/1/1"
-        console.log("i am running")
         navigate(`/${newId}`, { replace: true });
       }
     }
@@ -102,22 +105,30 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
       return (
         <div
           style={{
-            padding: "0 8px",
+            // padding: "0 8px",
           }}
         >
           <a>
-            <img
+            <LazyImage
+              src={artworks[i]?.cover}
+              alt={`Thumbnail ${i + 1}`}
+              width={25}
+              height={25}
+              borderRadius={"16px"}
+              border={i === activeIndex ? "2px solid black" : "none"} // Highlight active thumbnail
+            />
+            {/* <img
               src={artworks[i]?.cover} // Use artwork thumbnail
               alt={`Thumbnail ${i + 1}`}
               style={{
                 height: "25px",
                 width: "25px",
                 objectFit: "cover",
-                marginRight: "8px",
+                // marginRight: "8px",
                 borderRadius: "16px",
                 border: i === activeIndex ? "2px solid black" : "none", // Highlight active thumbnail
               }}
-            />
+            /> */}
           </a>
         </div>
       );
@@ -148,7 +159,7 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
         position: "absolute",
         paddingTop: 1,
         width: "100%",
-        height: "90%",
+        height: "80%",
         // "& .slick-slider, & .slick-list, & .slick-track": {
         //   height: "100%",
         // },
@@ -156,16 +167,21 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
           height: "100%",
         },
         "& .slick-dots li": {
-          margin: "0 16px",
+          margin: "0 8px",
         },
+        "& .slick-slide": {
+          "& > div": {
+            height: "100%"
+          }
+        }
       }}
     >
-      {collection?.name && <Typography variant="h5" sx={{ marginBottom: 1 }}>
+      {/* {collection?.name && <Typography variant="h5" sx={{ marginBottom: 1 }}>
         {collection?.name}
-      </Typography>}
+      </Typography>} */}
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
-          <CarouselGalleryItem key={artwork.id} artwork={artwork} />
+          <CarouselGalleryItem key={artwork.id} artwork={artwork} isLoading={isLoading} />
         ))}
       </Slider>
     </Box>

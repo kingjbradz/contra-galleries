@@ -2,6 +2,7 @@ import React from "react";
 import { Location } from "react-router";
 import { Drawer, Button, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useGalleryName } from "./PrivateGalleryComponentName";
 
 interface NavItem {
   text: string;
@@ -25,13 +26,18 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
   location,
   navigate,
 }) => {
+  const { name, setName } = useGalleryName();
   const drawerWidth = "240px";
 
-  const handleMobileRoute = (v: string) => {
-    if (v.includes("https")) {
-      window.open(v, "_blank");
+  const handleMobileRoute = (t: string, p: string) => {
+    if (p.includes("https")) {
+      window.open(p, "_blank");
     } else {
-      navigate(v);
+      console.log("t is", t)
+      setName(t)
+      navigate(p);
+      console.log("name is", name)
+      console.log("setName is", setName)
     }
     setSidebarOpen(false);
   };
@@ -66,7 +72,7 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
         {navItems.map(({ text, path }) => (
           <Button
             key={text}
-            onClick={() => handleMobileRoute(path)}
+            onClick={() => handleMobileRoute(text, path)}
             sx={{
               color: path === location.pathname ? "grey.700" : "common.white",
               borderRadius: 0,
