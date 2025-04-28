@@ -1,4 +1,12 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Skeleton,
+  Typography,
+  useMediaQuery,
+  Accordion,
+} from "@mui/material";
+import LazyImage from "../Components/LazyImage";
+import InfoAccordion from "../Components/InfoAccordion";
 
 interface Artwork {
   id: number;
@@ -16,16 +24,18 @@ interface Artwork {
 
 interface CarouselGalleryItemProps {
   artwork: Artwork | null;
+  isLoading: boolean | null;
 }
 
 const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
   artwork,
+  isLoading,
 }) => {
   if (!artwork) {
     return <Typography variant="h6">No artwork selected</Typography>; // Handle undefined artwork safely
   }
 
-  const isMd = useMediaQuery("(min-width: 900px)")
+  const isMd = useMediaQuery("(min-width: 900px)");
 
   return (
     <Box
@@ -39,71 +49,67 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
         height: "100%",
       }}
     >
-      <img
+      <LazyImage
         src={artwork.cover}
         alt={artwork.title}
-        style={{ maxWidth: isMd  ? "500px" : "350px", maxHeight: "400px" }}
+        width={isMd ? 500 : 350}
+        height={400}
       />
-      <Box sx={{ maxWidth: "75%", textAlign: "center", marginTop: 1 }}>
+      <Box
+        sx={{
+          maxWidth: "75%",
+          textAlign: "center",
+          marginTop: 1,
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            marginBottom: 1,
           }}
         >
           {artwork.artist.length > 0 && (
-            <Typography variant="h4">
-              {artwork.artist}
-            </Typography>
-          )}
-          {artwork.title.length > 0 && 
-          <Typography sx={{ fontStyle: "italic" }}>
-            {artwork.title}
-          </Typography>}
-          <Typography>
-            {artwork.year}
-          </Typography>
-          <Typography>{artwork.material}</Typography>
-          {artwork.dimensions.length > 0 && (
-            <Typography>{artwork.dimensions}</Typography>
-          )}
-          {artwork.signed.length > 0 && (
-            <Typography>{artwork.signed}</Typography>
-          )}
-          {artwork.info.length > 0 && (
-            <Typography>{artwork.info}</Typography>
-          )}
-          {artwork.price.length > 0 && (
-            <Typography>{artwork.price}</Typography>
+            <Typography variant="h4">{artwork.artist}</Typography>
           )}
         </Box>
-        {artwork.images.length > 0 ? 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center"
-            // height: "200px"
-          }}
-        >
-          {artwork.images.map((i, index) => (
-            <img
-              key={index}
-              src={i}
-              alt={`Image ${index}`}
-              style={{ 
-                // maxWidth: "200px",
-                height: "40px",
-                width: "40px",
-                margin: "8px 8px 32px 0",
-               }}
-            />
-          ))}
-        </Box> : <br />}
+        <InfoAccordion 
+          title={artwork.title}
+          content={
+            <>
+            <Typography>{artwork.year}</Typography>
+            <Typography>{artwork.material}</Typography>
+            {artwork.dimensions.length > 0 && (
+              <Typography>{artwork.dimensions}</Typography>
+            )}
+            {artwork.signed.length > 0 && (
+              <Typography>{artwork.signed}</Typography>
+            )}
+            {artwork.info.length > 0 && <Typography>{artwork.info}</Typography>}
+            {artwork.price.length > 0 && <Typography>{artwork.price}</Typography>}
+            {artwork.images.length > 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {artwork.images.map((src, index) => (
+                  <LazyImage key={index} src={src} alt={`Image ${index}`} />
+                ))}
+              </Box>
+            ) : (
+              <></>
+            )}
+          </>}
+        />
       </Box>
     </Box>
   );
 };
 
 export default CarouselGalleryItem;
+
+{/* <pre>{JSON.stringify(artwork, null, 2)}</pre> */}

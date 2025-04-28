@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 const featuredArtistsUrl = import.meta.env.VITE_FEATURED_ARTISTS_URL
+const generalGalleryUrl = import.meta.env.VITE_GENERAL_GALLERY_URL
+const privateGeneralGalleryUrl = import.meta.env.VITE_PRIVATE_GENERAL_GALLERY_URL
+const privateArtistListUrl = import.meta.env.VITE_PRIVATE_ARTIST_LIST_URL
+
+
 
 const fetchFeaturedArtistsData = async () => {
     const response = await fetch(featuredArtistsUrl);
@@ -18,7 +23,6 @@ export const useFeaturedArtistsData = () => {
     });
 };
 
-const generalGalleryUrl = import.meta.env.VITE_GENERAL_GALLERY_URL
 
 const fetchGeneralGalleryData = async () => {
     const response = await fetch(generalGalleryUrl);
@@ -35,8 +39,6 @@ export const useGeneralGalleryData = () => {
         refetchOnWindowFocus: false, // Prevent unnecessary refetches
     });
 };
-
-const privateGeneralGalleryUrl = import.meta.env.VITE_PRIVATE_GENERAL_GALLERY_URL
 
 const fetchPrivateGalleryData = async (url: string) => {
     const response = await fetch(url);
@@ -56,8 +58,6 @@ const fetchPrivateGalleryData = async (url: string) => {
       refetchOnWindowFocus: false, // Prevent unnecessary refetches
     });
   };
-
-const privateArtistListUrl = import.meta.env.VITE_PRIVATE_ARTIST_LIST_URL
 
 const fetchPrivateArtistListData = async () => {
     const response = await fetch(privateArtistListUrl);
