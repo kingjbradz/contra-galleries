@@ -28,7 +28,7 @@ const staticNavItems: NavItem[] = [
   { text: "General Gallery", path: "/1" },
 ];
 
-const Navbar: React.FC = () => {
+const PrivateNavbar: React.FC = () => {
   const { name } = useGalleryName()
   const navigate = useNavigate();
   const location = useLocation();
@@ -114,4 +114,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default PrivateNavbar;

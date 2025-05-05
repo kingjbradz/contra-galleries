@@ -1,9 +1,7 @@
 import {
   Box,
-  Skeleton,
   Typography,
   useMediaQuery,
-  Accordion,
 } from "@mui/material";
 import LazyImage from "../Components/LazyImage";
 import InfoAccordion from "../Components/InfoAccordion";
@@ -28,8 +26,7 @@ interface CarouselGalleryItemProps {
 }
 
 const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
-  artwork,
-  isLoading,
+  artwork
 }) => {
   if (!artwork) {
     return <Typography variant="h6">No artwork selected</Typography>; // Handle undefined artwork safely

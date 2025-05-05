@@ -5,6 +5,6 @@ const NavbarCont = () => {
     return import.meta.env.VITE_BRANCH === "dev" || import.meta.env.VITE_BRANCH === "main"
      ? 
     <Navbar /> : <PrivateNavbar />
-}
+}z
 
 export default NavbarCont
