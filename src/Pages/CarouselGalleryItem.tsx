@@ -57,12 +57,13 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
       />
       <Box
         sx={{
-          maxWidth: "75%",
+          maxWidth: "500px",
           textAlign: "center",
           marginTop: 1,
+          width: "100%"
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -74,9 +75,11 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
           {artwork.artist.length > 0 && (
             <Typography variant="h4">{artwork.artist}</Typography>
           )}
-        </Box>
+        </Box> */}
         <InfoAccordion 
-          title={artwork.title}
+          title={
+            artwork.artist.length > 0 ? `${artwork.artist} - ${artwork.title}` : artwork.title
+          }
           content={
             <>
             <Typography>{artwork.year}</Typography>
@@ -97,7 +100,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
                 }}
               >
                 {artwork.images.map((src, index) => (
-                  <LazyImage key={index} src={src} alt={`Image ${index}`} />
+                  <LazyImage key={index} src={src} alt={`Image ${index}`} isThumbnail />
                 ))}
               </Box>
             ) : (
