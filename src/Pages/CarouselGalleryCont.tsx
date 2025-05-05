@@ -2,14 +2,13 @@
 //@ts-ignore
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
-import { CircularProgress, Box, Typography } from "@mui/material";
+import { CircularProgress, Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import { usePrivateGalleryData } from "../api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CarouselGalleryItem from "./CarouselGalleryItem";
-import { useLocation } from "react-router-dom"
-import { useGalleryName } from "../Components/PrivateGalleryComponentName";
+// import { useGalleryName } from "../Components/PrivateGalleryComponentName";
 import LazyImage from "../Components/LazyImage";
 
 interface Artwork {
@@ -38,7 +37,7 @@ interface ArtistProp {
 }
 
 const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
-  const { setName } = useGalleryName()
+  // const { setName } = useGalleryName()
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
   const { id: artworkIdFromParams } = useParams();

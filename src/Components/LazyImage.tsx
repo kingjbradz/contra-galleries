@@ -10,6 +10,7 @@ interface LazyImageProps {
   className?: string;
   borderRadius?: string | number | null;
   border?: string | null;
+  isThumbnail?: boolean | null;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
@@ -20,9 +21,11 @@ const LazyImage: React.FC<LazyImageProps> = ({
   style = {},
   className = "",
   borderRadius,
-  border
+  border,
+  isThumbnail
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const isThumbnailDeclaration = isThumbnail ? "8px 8px 0 0" : ""
 
   // Handles case when image is cached and onLoad doesn't fire
   useEffect(() => {
@@ -39,7 +42,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
           width={width}
           height={height}
           sx={{
-            margin: "8px 8px 0 0",
+            margin: isThumbnailDeclaration,
             borderRadius: borderRadius ?? 1,
             ...style,
           }}
@@ -55,7 +58,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
             display: "block",
             width,
             height,
-            margin: "8px 8px 0px 0",
+            margin: isThumbnailDeclaration,
             objectFit: "cover",
             borderRadius: borderRadius ?? 4,
             border: border ?? "none",
