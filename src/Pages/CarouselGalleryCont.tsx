@@ -155,18 +155,25 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
       className="slider-container"
       sx={{
         textAlign: "center",
-        position: "absolute",
+        // position: "absolute",
         paddingTop: 1,
         width: "100%",
-        height: "80%",
-        // "& .slick-slider, & .slick-list, & .slick-track": {
-        //   height: "100%",
-        // },
+        // height: "calc(100% - 25px)",
+        "& .slick-slider": {
+          height: "100%",
+          position: "initial",
+          display: "",
+          boxSizing: ""
+        },
         "& .slick-slider, & .slick-list, & .slick-track, & .slick-slide": {
           height: "100%",
         },
         "& .slick-dots li": {
           margin: "0 8px",
+          bottom: "5px !important"
+        },
+        "& .slick-dots": {
+          bottom: "5px !important"
         },
         "& .slick-slide": {
           "& > div": {
