@@ -26,7 +26,7 @@ interface Artist {
 }
 
 const staticNavItems: NavItem[] = [
-  { text: "Gallery", path: "/gallery" },
+  // { text: "Gallery", path: "/gallery" },
   { text: "Contact", path: "/contact" },
 ];
 

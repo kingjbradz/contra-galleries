@@ -39,10 +39,10 @@ function PublicRouter() {
   return (
         <Routes>
           <Route index element={<Home />} />
-          <Route path="gallery">
+          {/* <Route path="gallery">
             <Route index element={<Gallery />} />
             <Route path=":id" element={<GalleryItem />} />
-          </Route>
+          </Route> */}
 
           {publicArtists?.map((artist: PublicArtist, index: any) => (
             <Route key={index} path={`/${artist.name.replace(/\s+/g, "")}`}>

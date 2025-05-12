@@ -170,7 +170,6 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
         },
         "& .slick-dots li": {
           margin: "0 8px",
-          bottom: "5px !important"
         },
         "& .slick-dots": {
           bottom: "5px !important"
