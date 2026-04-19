@@ -14,6 +14,8 @@ import {
 import Sidebar from "./Sidebar";
 import InstagramButton from "./InstagramButton";
 import { useFeaturedArtistsData } from "../api"; // Import API hook
+import { useExhibitions } from "../utils/api";
+import { Exhibition } from "../utils/global-types";
 
 // Define TypeScript types
 interface NavItem {
@@ -21,12 +23,7 @@ interface NavItem {
   path: string;
 }
 
-interface Artist {
-  name: string;
-}
-
 const staticNavItems: NavItem[] = [
-  // { text: "Gallery", path: "/gallery" },
   { text: "Contact", path: "/contact" },
 ];
 
@@ -36,23 +33,23 @@ const Navbar: React.FC = () => {
   const isMD = useMediaQuery("(min-width: 900px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
-  const { data: artists, isLoading } = useFeaturedArtistsData();
+  const { data: exhibitions, isLoading } = useExhibitions();
 
   const handleSidebar = () => {
     setSidebarOpen((current) => !current);
   };
 
-  // Create dynamic artist routes safely
-  const artistNavItems: NavItem[] = artists
-    ? artists
-        .map((artist: Artist) => ({
-          text: artist.name,
-          path: `/${artist.name.replace(/\s+/g, "")}`, // Remove spaces for cleaner URLs
-        }))
-    : [];
+  
+  const exhibitionNavItems: NavItem[] = exhibitions
+  ? exhibitions
+      .map((exhibition: Exhibition) => ({
+        text: exhibition.name,
+        path: `/${exhibition.slug}`,
+      }))
+  : [];
 
   // Combine static and dynamic nav items
-  const navItems: NavItem[] = [...artistNavItems, ...staticNavItems];
+  const navItems: NavItem[] = [...exhibitionNavItems, ...staticNavItems];
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", flexShrink: "0", height: "64px" }}>

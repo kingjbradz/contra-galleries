@@ -4,7 +4,8 @@ import PrivateNavbar from "./PrivateNavbar"
 const NavbarCont = () => {
     return import.meta.env.VITE_BRANCH === "dev" || import.meta.env.VITE_BRANCH === "main"
      ? 
-    <Navbar /> : <PrivateNavbar />
+    <Navbar /> :
+     <PrivateNavbar />
 }
 
-export default NavbarCont
+export default NavbarCont 

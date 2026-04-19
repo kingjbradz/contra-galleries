@@ -10,7 +10,7 @@ interface ArtworkDetails {
   info: string;
 }
 
-const GalleryItem = () => {
+const ExhibitionArtwork = () => {
   const location = useLocation();
   const artwork = location.state as ArtworkDetails | null; 
 
@@ -30,4 +30,4 @@ const GalleryItem = () => {
   );
 };
 
-export default GalleryItem;
+export default ExhibitionArtwork;

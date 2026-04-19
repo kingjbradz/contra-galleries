@@ -8,7 +8,6 @@ import { usePrivateGalleryData } from "../api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CarouselGalleryItem from "./CarouselGalleryItem";
-// import { useGalleryName } from "../Components/PrivateGalleryComponentName";
 import LazyImage from "../Components/LazyImage";
 
 interface Artwork {
@@ -116,18 +115,6 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
               borderRadius={"16px"}
               border={i === activeIndex ? "2px solid black" : "none"} // Highlight active thumbnail
             />
-            {/* <img
-              src={artworks[i]?.cover} // Use artwork thumbnail
-              alt={`Thumbnail ${i + 1}`}
-              style={{
-                height: "25px",
-                width: "25px",
-                objectFit: "cover",
-                // marginRight: "8px",
-                borderRadius: "16px",
-                border: i === activeIndex ? "2px solid black" : "none", // Highlight active thumbnail
-              }}
-            /> */}
           </a>
         </div>
       );
@@ -155,10 +142,8 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
       className="slider-container"
       sx={{
         textAlign: "center",
-        // position: "absolute",
         paddingTop: 1,
         width: "100%",
-        // height: "calc(100% - 25px)",
         "& .slick-slider": {
           height: "100%",
           position: "initial",
@@ -181,9 +166,6 @@ const CarouselGalleryCont = ({ artist }: { artist?: ArtistProp }) => {
         }
       }}
     >
-      {/* {collection?.name && <Typography variant="h5" sx={{ marginBottom: 1 }}>
-        {collection?.name}
-      </Typography>} */}
       <Slider ref={sliderRef} {...settings}>
         {artworks.map((artwork) => (
           <CarouselGalleryItem key={artwork.id} artwork={artwork} isLoading={isLoading} />

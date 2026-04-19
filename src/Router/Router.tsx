@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
-import PublicRouter from "./PublicRouter";
-import PrivateRouter from "./PrivateRouter";
+import MainRouter from "./MainRouter";
+import CarouselRouter from "./CarouselRouter";
 
-const isPublic = import.meta.env.VITE_BRANCH === "dev" 
-|| import.meta.env.VITE_BRANCH === "main" && true
+const isOnsite = 
+// import.meta.env.VITE_BRANCH === "dev" ||
+import.meta.env.VITE_ENVIRONMENT === "onsite" && true
+
 
 function Router() {
   return (
@@ -11,18 +13,18 @@ function Router() {
       id="router-container"
       sx={{
         display: "flex",
-        justifyContent: isPublic ? "center" : "space-between",
+        justifyContent: isOnsite ? "center" : "space-between",
         alignItems: "center",
         flexGrow: 1,
         height: "100%",
-        flexDirection: isPublic ? "row" : "column"
+        flexDirection: isOnsite ? "row" : "column"
       }}
     >
-      {isPublic 
+      {isOnsite 
       ? (
-        <PublicRouter />
-      ) : (
-        <PrivateRouter />
+        <CarouselRouter />
+        ) : (
+          <MainRouter />
       )}
     </Box>
   );

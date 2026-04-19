@@ -1,53 +1,38 @@
-import { useNavigate } from "react-router";
-import Grid from "@mui/material/Grid2";
-import { Box, Typography, CircularProgress, useMediaQuery } from "@mui/material";
-import { useGeneralGalleryData } from "../api";
-
-interface Artwork {
-  title: string;
-  image: string;
-  artist: string;
-}
+import { Box, Card, CardActionArea, CardContent, CardMedia, Link, Typography } from "@mui/material"
+import { useExhibitions } from "../utils/api"
+import { Exhibition } from "../utils/global-types"
 
 const Gallery = () => {
-  const navigate = useNavigate();
-  const is520 = useMediaQuery("(min-width: 520px)");
-  const { data, isLoading } = useGeneralGalleryData();
+  const { data, isLoading } = useExhibitions()
 
-  const artworks: Artwork[] = (data as Artwork[]) ?? [];
-
-  if (isLoading) {
-    return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
-        <CircularProgress sx={{ color: "common.black" }} />
-      </Box>
-    );
-  }
 
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: is520 ? "row" : "column",
-        alignItems: "center",
-        margin: 1,
-      }}
-    >
-      {artworks.map((artwork, index) => (
-        <Box
-          key={index} 
-          onClick={() => navigate(`${artwork.title.replace(/\s+/g, "")}`, { state: artwork })}
-          sx={{ margin: 1, textAlign: "center", cursor: "pointer" }}
+    <Box>
+      {data.map((e: Exhibition) => (
+        <Card key={e.id} sx={{ width: 250 }}>
+        <CardActionArea 
+        component={Link} href={`/${e.slug}`}
         >
-          <img src={artwork.image} alt={artwork.title} />
-          <Typography>{artwork.title}</Typography>
-          <Typography>{artwork.artist}</Typography>
-        </Box>
+          <CardMedia
+            component="img"
+            image={e.cover_image}
+            alt="cover image"
+            sx={{
+              height: 200, // Fixed height in pixels
+              objectFit: "cover", // Fills the area, cropping edges if necessary
+              width: "100%",
+            }}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {e.name}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
       ))}
-    </Grid>
-  );
-};
+    </Box>
+  )
+}
 
-export default Gallery;
+export default Gallery

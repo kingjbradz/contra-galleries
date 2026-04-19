@@ -3,6 +3,8 @@ import { Box, CircularProgress } from "@mui/material";
 import CarouselGalleryCont from "../Pages/CarouselGalleryCont";
 import App404 from "../Pages/App404";
 import { usePrivateArtistListData } from "../api";
+import { useExhibitions } from "../utils/api";
+import { Exhibition } from "../utils/global-types";
 
 interface PrivateArtist {
   id: number;
@@ -14,10 +16,11 @@ interface PrivateArtistList {
   artists: PrivateArtist[]; // Define 'artists' as an array of PrivateArtist
 }
 
-function PrivateRouter() {
+function CarouselRouter() {
   const { data, isLoading } = usePrivateArtistListData();
   const privateArtistsList: PrivateArtistList = data ?? []; // data can be undefined while loading
   const artists = privateArtistsList?.artists ?? []; // Access the 'artists' property
+  
 
   if (isLoading) {
     return (
@@ -37,17 +40,17 @@ function PrivateRouter() {
   return (
     <Routes>
       <Route path="/" element={<CarouselGalleryCont />} />
-      <Route path="/:id" element={<CarouselGalleryCont />} />
+      {/* <Route path="/:id" element={<CarouselGalleryCont />} /> */}
 
-        {artists.length > 0 && artists.map((artist: PrivateArtist, index: any) => (
+        {/* {artists.length > 0 && artists.map((artist: PrivateArtist, index: any) => (
           <Route key={index} path={`/${artist.name.replace(/\s+/g, "").toLowerCase()}`}>
             <Route index element={<CarouselGalleryCont artist={artist} />} />
             <Route path={`/${artist.name.replace(/\s+/g, "").toLowerCase()}/:id`} element={<CarouselGalleryCont artist={artist} />} />
           </Route>
-        ))}
+        ))} */}
       <Route path="/*" element={<App404 />} />
     </Routes>
   );
 }
 
-export default PrivateRouter;
+export default CarouselRouter;
