@@ -7,26 +7,11 @@ const getEnvironmentHeaders = () => {
   let environment = import.meta.env.VITE_ENVIRONMENT; // Default
   let apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
 
-  // 1. Determine Environment
+  // Determine Environment
   // Logic: if it's "onsite.domain.com", environment is "onsite"
   if (parts.length >= 3 && parts[0] !== 'www') {
     environment = parts[0];
   }
-
-  // 2. Localhost Development Override (For Testing)
-  // You can manually change this string to 'onsite' or 'private' to test
-  // if (hostname === 'localhost' || hostname === '127.0.0.1') {
-  //   // environment = 'onsite'; // Uncomment this to test Onsite logic
-  // }
-
-  // 2. Attach API Key if not public
-  // Note: Ensure REACT_APP_INTERNAL_KEY is in your React .env
-  // if (environment !== 'public') {
-  //   apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
-  // }
-
-  console.log("environment", environment)
-  console.log("apiKey", apiKey)
 
   return {
     'Content-Type': 'application/json',

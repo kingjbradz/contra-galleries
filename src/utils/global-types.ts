@@ -10,7 +10,7 @@ export interface ExhibitionArtwork {
   info?: string;
   slug?: string;
   artwork_images: ArtworkImage[];
-  name?: string;
+  title?: string;
   artist_name?: string;
   year?: string;
   signed?: boolean;

@@ -1,21 +1,18 @@
 import { useNavigate } from "react-router";
 import Grid from "@mui/material/Grid2";
-import { Box, Typography, CircularProgress, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import BrushIcon from "@mui/icons-material/Brush";
 import { Exhibition } from "../utils/global-types";
 
-const ExhibitionPage = ( { exhibition }: { exhibition: Exhibition } ) => {
+const ExhibitionPage = ({ exhibition }: { exhibition: Exhibition }) => {
   const navigate = useNavigate();
   const is520 = useMediaQuery("(min-width: 520px)");
-
-  // const artworks: Artwork[] = (exhibition.exhibition_artworks as Artwork[]) ?? [];
-
-  // if (isLoading) {
-  //   return (
-  //     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
-  //       <CircularProgress sx={{ color: "common.black" }} />
-  //     </Box>
-  //   );
-  // }
 
   return (
     <Grid
@@ -29,15 +26,70 @@ const ExhibitionPage = ( { exhibition }: { exhibition: Exhibition } ) => {
       }}
     >
       {exhibition?.artworks?.map((artwork, index) => (
-        <Box
-          key={index} 
+        <Card
+          key={index}
+          sx={{
+            minHeight: "280px",
+            width: 320,
+            cursor: "pointer",
+            position: "relative",
+            overflow: "hidden",
+            margin: 1,
+          }}
           onClick={() => navigate(`${artwork?.slug}`, { state: artwork })}
-          sx={{ margin: 1, textAlign: "center", cursor: "pointer" }}
         >
-          <img src={artwork.artwork_images[0].url} alt={artwork.name} style={{ height: 300, width: 300 }} />
-          <Typography>{artwork.name}</Typography>
-          <Typography>{artwork.artist_name}</Typography>
-        </Box>
+          {/* Image fills the card */}
+          <Box
+            component="img"
+            src={artwork.artwork_images[0].url}
+            loading="lazy"
+            alt=""
+            sx={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+
+          {/* Gradient overlay */}
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
+            }}
+          />
+
+          {/* Text content pinned to bottom */}
+          <CardContent
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "#fff" }}>
+              {artwork?.title!.length > 1 ? artwork.title : "Untitled"}
+            </Typography>
+            <Typography
+              sx={{
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <BrushIcon fontSize="small" />
+              {artwork?.artist_name && artwork?.artist_name!.length > 1
+                ? artwork?.artist_name
+                : "Unknown Artist"}
+            </Typography>
+          </CardContent>
+        </Card>
       ))}
     </Grid>
   );

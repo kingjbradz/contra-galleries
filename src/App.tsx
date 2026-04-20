@@ -11,7 +11,18 @@ const theme = createTheme({
   typography: {
     fontFamily: "Zen Kaku Gothic Antique",
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#faebeb"
+        }
+      }
+    }
+  }
 });
+
+//#faebeb
 
 function App() {
   return (
@@ -19,7 +30,7 @@ function App() {
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
         <NavbarCont />
         <Router />
-        {import.meta.env.VITE_BRANCH === "main" && <Footer />}
+        <Footer />
       </Box>
     </ThemeProvider>
   );

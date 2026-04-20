@@ -41,12 +41,16 @@ const Navbar: React.FC = () => {
 
   
   const exhibitionNavItems: NavItem[] = exhibitions
-  ? exhibitions
+  ? exhibitions.length <= 3 ?
+  exhibitions
       .map((exhibition: Exhibition) => ({
         text: exhibition.name,
         path: `/${exhibition.slug}`,
       }))
-  : [];
+  : [{
+    text: "Exhibitions",
+    path: "/exhibitions"
+  }] : [];
 
   // Combine static and dynamic nav items
   const navItems: NavItem[] = [...exhibitionNavItems, ...staticNavItems];
