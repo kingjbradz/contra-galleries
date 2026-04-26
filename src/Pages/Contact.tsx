@@ -18,7 +18,7 @@ const Contact = () => {
     );
   }
   return (
-    <Box sx={{ flexDirection: "column", height: "100%" }}>
+    <Box sx={{ flexDirection: "column", justifyContent: "center", height: "100%" }}>
 
       <form
         onSubmit={handleSubmit}

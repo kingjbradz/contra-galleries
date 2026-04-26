@@ -1,5 +1,8 @@
 // @ts-ignore
-import "@fontsource/zen-kaku-gothic-antique"
+import "@fontsource/michroma"
+//@ts-ignore
+import "@fontsource/montserrat"
+// import "@fontsource/zen-kaku-gothic-antique"
 import Box from "@mui/material/Box";
 // @ts-ignore
 import NavbarCont from "./Components/NavbarCont";
@@ -9,7 +12,13 @@ import { ThemeProvider, createTheme } from "@mui/material";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Zen Kaku Gothic Antique",
+    fontFamily: "Michroma",
+    body1: {
+      fontFamily: "Montserrat"
+    },
+    h6: {
+      fontFamily: "Montserrat"
+    }
   },
   components: {
     MuiCssBaseline: {

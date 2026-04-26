@@ -9,25 +9,27 @@ import.meta.env.VITE_ENVIRONMENT === "onsite" && true
 
 function Router() {
   return (
-    <Box
-      id="router-container"
-      sx={{
-        display: "flex",
-        justifyContent: isOnsite ? "center" : "space-between",
-        alignItems: "center",
-        flexGrow: 1,
-        height: "100%",
-        flexDirection: isOnsite ? "row" : "column"
-      }}
+    <
     >
-      {isOnsite 
+    {isOnsite 
       ? (
         <CarouselRouter />
-        ) : (
+      ) : (
           <MainRouter />
       )}
-    </Box>
+    </>
   );
 }
 
 export default Router;
+
+// id="router-container"
+// sx={{
+//   display: "flex",
+//   justifyContent: "center",
+//   // justifyContent: isOnsite ? "center" : "space-between",
+//   alignItems: "center",
+//   flexGrow: 1,
+//   height: "100%",
+//   flexDirection: isOnsite ? "row" : "column"
+// }}

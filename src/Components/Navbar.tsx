@@ -1,3 +1,5 @@
+// @ts-ignore
+import "@fontsource/poppins/200.css"
 import React from "react";
 import { useNavigate, useLocation } from "react-router";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,15 +11,14 @@ import {
   IconButton,
   Button,
   useMediaQuery,
-  Typography
+  useTheme
 } from "@mui/material";
 import Sidebar from "./Sidebar";
 import InstagramButton from "./InstagramButton";
-import { useFeaturedArtistsData } from "../api"; // Import API hook
 import { useExhibitions } from "../utils/api";
 import { Exhibition } from "../utils/global-types";
+import Logo from "./Logo";
 
-// Define TypeScript types
 interface NavItem {
   text: string;
   path: string;
@@ -28,6 +29,7 @@ const staticNavItems: NavItem[] = [
 ];
 
 const Navbar: React.FC = () => {
+  const theme = useTheme()
   const navigate = useNavigate();
   const location = useLocation();
   const isMD = useMediaQuery("(min-width: 900px)");
@@ -63,7 +65,7 @@ const Navbar: React.FC = () => {
           {/* <Typography>{isMD ? `I am over MD: ${window.innerWidth}` : `I am under MD: ${window.innerWidth}` }</Typography> */}
           {isMD ? (
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: '100%', minHeight: "inherit" }}>
-              <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>Contra Galleries</Typography>
+              <Logo />
               <Box sx={{ display: { xs: "none", sm: "flex" }, marginLeft: 1, minHeight: "inherit" }}>
                 {isLoading ? (
                   ""
@@ -71,9 +73,11 @@ const Navbar: React.FC = () => {
                   navItems.map(({ text, path }) => (
                     <Button
                       key={text}
+                      size="small"
                       onClick={() => navigate(path)}
                       sx={{
                         color: path === location.pathname ? "grey.500" : "common.white",
+                        borderBottom: path === location.pathname ? `5px solid ${theme.palette.grey[500]}` : "",
                         borderRadius: 0,
                         marginLeft: 2,
                       }}
@@ -96,7 +100,7 @@ const Navbar: React.FC = () => {
                 >
                   <MenuIcon />
                 </IconButton>
-                <Typography variant="h5" onClick={() => navigate("/")} sx={{ cursor: "pointer", marginBottom: 1 }}>Contra Galleries</Typography>
+                <Logo />
                 <Box></Box>
               <Sidebar
                 sidebarOpen={sidebarOpen}
