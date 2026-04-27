@@ -42,6 +42,7 @@ const Navbar: React.FC = () => {
   };
 
   
+  // render default exhibitions link on full screens larger than 900px 
   const exhibitionNavItems: NavItem[] = exhibitions
   ? exhibitions.length <= 3 ?
   exhibitions

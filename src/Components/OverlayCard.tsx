@@ -5,7 +5,7 @@ interface OverlayCardProps {
   width?: number;
   maxWidth?: number;
   path: string;
-  image: string;
+  image: string | undefined;
   state?: object;
   icon?: React.ReactElement;
   top?: string | undefined;

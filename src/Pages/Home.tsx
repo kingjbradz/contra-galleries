@@ -19,7 +19,7 @@ const Home = () => {
         image={"https://contrastudios.com/wp-content/uploads/2026/04/contra-1.png"}
         maxWidth={1000}
         height="75vh"
-        path={`/gallery`}
+        path={`/exhibitions`}
         extraSx={{ objectFit: "cover" }}
         bottom= {"EXPLORE HERE"}
         icon={<ArrowForwardIcon />}

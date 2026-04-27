@@ -18,7 +18,14 @@ const Contact = () => {
     );
   }
   return (
-    <Box sx={{ flexDirection: "column", justifyContent: "center", height: "100%" }}>
+    <Box sx={{ 
+      display: "flex",
+      flexDirection: "column", 
+      justifyContent: "space-around",
+      height: "100%",
+      margin: "auto",
+      flexGrow: 1,
+      }}>
 
       <form
         onSubmit={handleSubmit}
@@ -26,7 +33,7 @@ const Contact = () => {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
-          minWidth: is600 ? "350px" : "100%",
+          minWidth: is600 ? "500px" : "100%",
           height: "100%",
           justifyContent: "center"
         }}
@@ -74,7 +81,7 @@ const Contact = () => {
         <br />
         <StyledTextField
           multiline={true}
-          minRows={is600 ? 10 : 5}
+          minRows={is600 ? 15 : 10}
           id="message"
           name="message"
           size="small"

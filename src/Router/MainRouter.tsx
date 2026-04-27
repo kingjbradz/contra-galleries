@@ -31,7 +31,7 @@ function MainRouter() {
   return (
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/exhibitions" element={<Gallery />} /> // Gallery component is a gateway point to exhibitions
           {exhibitions?.map((exhibition: Exhibition, index: any) => (
             <Route key={index} path={`/${exhibition.slug}`}>
               <Route index element={<ExhibitionPage exhibition={exhibition} />} />
