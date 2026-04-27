@@ -1,3 +1,4 @@
+import { useParams } from "react-router";
 import Grid from "@mui/material/Grid2";
 import {
   useMediaQuery,
@@ -5,11 +6,21 @@ import {
 import BrushIcon from "@mui/icons-material/Brush";
 import { Exhibition } from "../utils/global-types";
 import OverlayCard from "../Components/OverlayCard";
+import ExhibitionArtwork from "./ExhibitionArtwork";
 
 const ExhibitionPage = ({ exhibition }: { exhibition: Exhibition }) => {
   const is520 = useMediaQuery("(min-width: 520px)");
+  const { id } = useParams();
+
+  const selectedArtwork = id
+    ? (exhibition?.artworks?.find((a) => a.slug === id) ?? null)
+    : null;
+
+
+  const parentPath = `/${exhibition.slug}`;
 
   return (
+    <>
     <Grid
       container
       sx={{
@@ -22,7 +33,7 @@ const ExhibitionPage = ({ exhibition }: { exhibition: Exhibition }) => {
     >
       {exhibition?.artworks?.map((artwork, index) => (
         <OverlayCard 
-        minHeight="280px"
+        // minHeight="280px"
         key={index}
         image={artwork.artwork_images[0].url}
         width={320}
@@ -37,6 +48,24 @@ const ExhibitionPage = ({ exhibition }: { exhibition: Exhibition }) => {
         />
       ))}
     </Grid>
+    <ExhibitionArtwork
+  artwork={
+    selectedArtwork
+      ? {
+          image: selectedArtwork.artwork_images[0].url,
+          title: selectedArtwork.title ?? "Untitled",
+          artist: selectedArtwork.artist_name ?? "Unknown Artist",
+          year: selectedArtwork.year ?? 0,
+          material: selectedArtwork.material ?? "",
+          dimensions: selectedArtwork.dimensions ?? "",
+          info: selectedArtwork.info ?? "",
+          slug: selectedArtwork.slug ?? "",
+        }
+      : null
+  }
+  parentPath={parentPath}
+/>
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ function MainRouter() {
           {exhibitions?.map((exhibition: Exhibition, index: any) => (
             <Route key={index} path={`/${exhibition.slug}`}>
               <Route index element={<ExhibitionPage exhibition={exhibition} />} />
-              <Route path=":id" element={<ExhibitionArtwork />} />
+              <Route path=":id" element={<ExhibitionPage exhibition={exhibition} />} />
             </Route>
           ))}
           <Route path="/contact" element={<Contact />} />
