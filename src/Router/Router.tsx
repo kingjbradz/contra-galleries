@@ -1,26 +1,20 @@
-import { Box } from "@mui/material";
-import PublicRouter from "./PublicRouter";
-import PrivateRouter from "./PrivateRouter";
+import MainRouter from "./MainRouter";
+import CarouselRouter from "./CarouselRouter";
+
+const isOnsite = 
+import.meta.env.VITE_ENVIRONMENT === "onsite" && true
+
 
 function Router() {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexGrow: 1,
-        height: "100%"
-      }}
-    >
-      {import.meta.env.VITE_BRANCH === "dev" 
-       || import.meta.env.VITE_BRANCH === "main" 
+    <>
+    {isOnsite 
       ? (
-        <PublicRouter />
+        <CarouselRouter />
       ) : (
-        <PrivateRouter />
+          <MainRouter />
       )}
-    </Box>
+    </>
   );
 }
 

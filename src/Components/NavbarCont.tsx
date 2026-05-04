@@ -1,10 +1,12 @@
-import Navbar from "./Navbar"
-import PrivateNavbar from "./PrivateNavbar"
+import Navbar from "./Navbar";
+import PrivateNavbar from "./PrivateNavbar";
 
 const NavbarCont = () => {
-    return import.meta.env.VITE_BRANCH === "dev" || import.meta.env.VITE_BRANCH === "main"
-     ? 
-    <Navbar /> : <PrivateNavbar />
-}
+  return import.meta.env.VITE_ENVIRONMENT === "private" ? (
+    <PrivateNavbar />
+  ) : (
+    <Navbar />
+  );
+};
 
-export default NavbarCont
+export default NavbarCont;
