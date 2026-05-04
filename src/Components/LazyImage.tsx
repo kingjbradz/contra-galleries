@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Skeleton } from "@mui/material";
 
 interface LazyImageProps {
-  src: string;
-  alt: string;
+  src: string | undefined;
+  alt: string | undefined;
   width?: number | string;
   height?: number | string;
   style?: React.CSSProperties;
@@ -29,6 +29,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
 
   // Handles case when image is cached and onLoad doesn't fire
   useEffect(() => {
+    setLoaded(false); // reset first
+    if (!src) return; // guard against undefined
     const img = new Image();
     img.src = src;
     img.onload = () => setLoaded(true);
