@@ -16,6 +16,7 @@ interface SidebarProps {
   navItems: NavItem[];
   location: Location;
   navigate: (path: string) => void;
+  isLoading: boolean;
 }
 
 const PrivateSidebar: React.FC<SidebarProps> = ({
@@ -25,6 +26,7 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
   navItems,
   location,
   navigate,
+  isLoading,
 }) => {
   const { name, setName } = useGalleryName();
   const drawerWidth = "240px";
@@ -69,7 +71,8 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
         </IconButton>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-        {navItems.map(({ text, path }) => (
+        {isLoading ? "" :
+        navItems.map(({ text, path }) => (
           <Button
             key={text}
             onClick={() => handleMobileRoute(text, path)}
@@ -77,7 +80,8 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
               color: path === location.pathname ? "grey.700" : "common.white",
               borderRadius: 0,
               justifyContent: "flex-start",
-              paddingLeft: 2
+              paddingLeft: 2,
+              textAlign: "left"
             }}
           >
             {text}
