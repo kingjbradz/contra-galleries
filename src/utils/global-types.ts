@@ -12,6 +12,7 @@ export interface ExhibitionArtwork {
   artwork_images: ArtworkImage[];
   title?: string;
   artist_name?: string;
+  price?: string;
   year?: string;
   signed?: boolean;
   material?: string;

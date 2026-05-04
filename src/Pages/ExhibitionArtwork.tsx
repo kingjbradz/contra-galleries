@@ -25,6 +25,8 @@ interface ArtworkDetails {
 interface ExhibitionArtworkProps {
   artwork: ArtworkDetails | null;
   parentPath: string;
+  open?: boolean;
+  onClose?: () => void;
 }
 
 const SlideUp = forwardRef(function SlideUp(
@@ -34,21 +36,21 @@ const SlideUp = forwardRef(function SlideUp(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ExhibitionArtwork = ({ artwork, parentPath }: ExhibitionArtworkProps) => {
+const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onCloseProp }: ExhibitionArtworkProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const open = !!id && !!artwork;
+  const open = openProp !== undefined ? openProp : !!id && !!artwork; 
 
   const handleClose = () => {
-    navigate(parentPath);
+    onCloseProp ? onCloseProp() : navigate(parentPath); 
   };
 
   return (
     <Dialog
       open={open}
       onClose={handleClose}
-      TransitionComponent={SlideUp}
+      // TransitionComponent={SlideUp}
       fullWidth
       maxWidth="md"
       slotProps={{
@@ -83,7 +85,7 @@ const ExhibitionArtwork = ({ artwork, parentPath }: ExhibitionArtworkProps) => {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+              // gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
               minHeight: 480,
             }}
           >

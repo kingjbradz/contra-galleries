@@ -10,11 +10,12 @@ interface OverlayCardProps {
   icon?: React.ReactElement;
   top?: string | undefined;
   bottom?: string | undefined;
+  onClick?: () => void;
   height?: string | number | undefined;
   extraSx?: object | undefined;
 }
 
-const OverlayCard = ({ width, maxWidth, height = 320, path, state, image, icon, top, bottom, extraSx }: OverlayCardProps) => {
+const OverlayCard = ({ width, maxWidth, height = 320, path, state, image, icon, top, bottom, onClick, extraSx }: OverlayCardProps) => {
   const navigate = useNavigate()
   console.log("image", image)
   return (
@@ -29,7 +30,7 @@ const OverlayCard = ({ width, maxWidth, height = 320, path, state, image, icon, 
             margin: 1,
             ...extraSx
           }}
-          onClick={() => navigate(path, state)}
+          onClick={() => onClick ? onClick() : navigate(path, state)}
         >
           {/* Image fills the card */}
           <Box
@@ -65,7 +66,7 @@ const OverlayCard = ({ width, maxWidth, height = 320, path, state, image, icon, 
               right: 0,
             }}
           >
-            <Typography variant="h6" sx={{ color: "#fff" }}>
+            <Typography variant="h6" sx={{ color: "#fff", textAlign: "left" }}>
               {top ? top : ""}
             </Typography>
             <Typography

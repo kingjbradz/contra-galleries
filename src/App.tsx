@@ -39,7 +39,7 @@ function App() {
       <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "space-between" }}>
         <NavbarCont />
         <Router />
-        <Footer />
+       {import.meta.env.VITE_ENVIRONMENT !== "onsite" ? <Footer /> : <Box></Box>}
       </Box>
     </ThemeProvider>
   );

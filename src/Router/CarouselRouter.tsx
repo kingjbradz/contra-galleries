@@ -2,25 +2,15 @@ import { Route, Routes } from "react-router";
 import { Box, CircularProgress } from "@mui/material";
 import CarouselGalleryCont from "../Pages/CarouselGalleryCont";
 import App404 from "../Pages/App404";
-import { usePrivateArtistListData } from "../api";
 import { useExhibitions } from "../utils/api";
 import { Exhibition } from "../utils/global-types";
+import Gallery from "../Pages/Gallery";
+import Maintenance from "../Pages/Maintenance";
 
-interface PrivateArtist {
-  id: number;
-  name: string;
-  url: string;
-}
-
-interface PrivateArtistList {
-  artists: PrivateArtist[]; // Define 'artists' as an array of PrivateArtist
-}
 
 function CarouselRouter() {
-  const { data, isLoading } = usePrivateArtistListData();
-  const privateArtistsList: PrivateArtistList = data ?? []; // data can be undefined while loading
-  const artists = privateArtistsList?.artists ?? []; // Access the 'artists' property
-  
+  const { data, isLoading } = useExhibitions();
+  const exhibitions: Exhibition[] = data ?? [];
 
   if (isLoading) {
     return (
@@ -39,15 +29,15 @@ function CarouselRouter() {
   }
   return (
     <Routes>
-      <Route path="/" element={<CarouselGalleryCont />} />
-      {/* <Route path="/:id" element={<CarouselGalleryCont />} /> */}
+      <Route path="/" element={<Gallery />} />
 
-        {/* {artists.length > 0 && artists.map((artist: PrivateArtist, index: any) => (
-          <Route key={index} path={`/${artist.name.replace(/\s+/g, "").toLowerCase()}`}>
-            <Route index element={<CarouselGalleryCont artist={artist} />} />
-            <Route path={`/${artist.name.replace(/\s+/g, "").toLowerCase()}/:id`} element={<CarouselGalleryCont artist={artist} />} />
+        {exhibitions?.map((exhibition: Exhibition, index: any) => (
+          <Route key={index} path={`/${exhibition.slug}`}>
+            <Route index element={<CarouselGalleryCont exhibition={exhibition} />} />
+            <Route path={`/${exhibition.slug}/:id`} element={<CarouselGalleryCont exhibition={exhibition} />} />
           </Route>
-        ))} */}
+        ))}
+      <Route path="/maintenance" element={<Maintenance />} />
       <Route path="/*" element={<App404 />} />
     </Routes>
   );

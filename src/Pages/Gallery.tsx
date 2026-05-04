@@ -5,7 +5,7 @@ import OverlayCard from "../Components/OverlayCard"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Gallery = () => {
-  const { data, isLoading } = useExhibitions()
+  const { data } = useExhibitions()
 
 
   return (
@@ -14,7 +14,6 @@ const Gallery = () => {
     sx={{
       display: "flex",
       justifyContent: "center",
-      // flexDirection: is520 ? "row" : "column",
       alignItems: "center",
       margin: 1,
     }}

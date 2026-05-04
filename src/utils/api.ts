@@ -5,7 +5,7 @@ const getEnvironmentHeaders = () => {
   const parts = hostname.split('.');
   
   let environment = import.meta.env.VITE_ENVIRONMENT; // Default
-  let apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
+  const apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
 
   // Determine Environment
   // Logic: if it's "onsite.domain.com", environment is "onsite"
