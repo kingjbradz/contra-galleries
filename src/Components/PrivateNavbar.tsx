@@ -11,21 +11,18 @@ import {
 } from "@mui/material";
 import PrivateSidebar from "./PrivateSidebar";
 import InstagramButton from "./InstagramButton";
-import { usePrivateArtistListData } from "../api";
+import { Exhibition } from "../utils/global-types";
+import { useExhibitions } from "../utils/api";
 import { useGalleryName } from "./PrivateGalleryComponentName";
+import Logo from "./Logo";
 
 interface NavItem {
   text: string;
   path: string;
 }
 
-interface Artist {
-  name: string;
-}
-
 const staticNavItems: NavItem[] = [
   { text: "Main Website", path: "https://contragalleries.com" },
-  { text: "General Gallery", path: "/1" },
 ];
 
 const PrivateNavbar: React.FC = () => {
@@ -34,24 +31,27 @@ const PrivateNavbar: React.FC = () => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
-  const { data: list, isLoading } = usePrivateArtistListData();
+  const { data: exhibitions, isLoading } = useExhibitions();
 
   const handleSidebar = () => {
     setSidebarOpen((current) => !current);
   };
   
-  // Create dynamic artist routes safely
-  const artistNavItems: NavItem[] =
-    !isLoading && list.artists?.length > 0
-      ? list.artists?.map((artist: Artist, index: any) => ({
-          key: index,
-          text: artist.name,
-          path: `/${artist.name.replace(/\s+/g, "")}/1`,
-        }))
-      : [];
+  // render default exhibitions link on full screens larger than 900px 
+  const exhibitionNavItems: NavItem[] = exhibitions
+  ? exhibitions.length <= 3 ?
+  exhibitions
+      .map((exhibition: Exhibition) => ({
+        text: exhibition.name,
+        path: `/${exhibition.slug}`,
+      }))
+  : [{
+    text: "Exhibitions",
+    path: "/exhibitions"
+  }] : [];
 
   // Combine static and dynamic nav items
-  const navItems: NavItem[] = [...staticNavItems, ...artistNavItems];
+  const navItems: NavItem[] = [...exhibitionNavItems, ...staticNavItems];
 
   return (
     <Box
@@ -93,7 +93,7 @@ const PrivateNavbar: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="h5">Contra Galleries</Typography>
+              <Logo />
               <Typography>{name}</Typography>
             </Box>
             <Box>
@@ -106,6 +106,7 @@ const PrivateNavbar: React.FC = () => {
               navItems={navItems}
               location={location}
               navigate={navigate}
+              isLoading={isLoading}
             />
           </Box>
         </Toolbar>
