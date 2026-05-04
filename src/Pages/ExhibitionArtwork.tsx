@@ -5,11 +5,8 @@ import {
   Box,
   Typography,
   IconButton,
-  Slide,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { TransitionProps } from "@mui/material/transitions";
-import { forwardRef } from "react";
 
 interface ArtworkDetails {
   image?: string;
@@ -28,13 +25,6 @@ interface ExhibitionArtworkProps {
   open?: boolean;
   onClose?: () => void;
 }
-
-const SlideUp = forwardRef(function SlideUp(
-  props: TransitionProps & { children: React.ReactElement },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onCloseProp }: ExhibitionArtworkProps) => {
   const navigate = useNavigate();
