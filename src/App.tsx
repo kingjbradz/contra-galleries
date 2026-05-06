@@ -1,10 +1,8 @@
-// @ts-ignore
+// @ts-expect-error - fontsource is not typed
 import "@fontsource/michroma"
-//@ts-ignore
+//@ts-expect-error - fontsource is not typed
 import "@fontsource/montserrat"
-// import "@fontsource/zen-kaku-gothic-antique"
 import Box from "@mui/material/Box";
-// @ts-ignore
 import NavbarCont from "./Components/NavbarCont";
 import Footer from "./Components/Footer";
 import Router from "./Router/Router";
