@@ -7,11 +7,22 @@ const getEnvironmentHeaders = () => {
   let environment = import.meta.env.VITE_ENVIRONMENT; // Default
   const apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
 
+
+  console.log("VITE_ENVIRONMENT:", import.meta.env.VITE_ENVIRONMENT);
+  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+  console.log("Hostname:", hostname);
+  console.log("Parts:", parts);
+  console.log("Parts length:", parts.length);
+
+
   // Determine Environment
   // Logic: if it's "onsite.domain.com", environment is "onsite"
   if (parts.length >= 3 && parts[0] !== 'www') {
     environment = parts[0];
   }
+
+  console.log("Final environment being sent:", environment);
+
 
   return {
     'Content-Type': 'application/json',
