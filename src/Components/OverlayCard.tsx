@@ -17,7 +17,6 @@ interface OverlayCardProps {
 
 const OverlayCard = ({ width, maxWidth, height = 320, path, state, image, icon, top, bottom, onClick, extraSx }: OverlayCardProps) => {
   const navigate = useNavigate()
-  console.log("image", image)
   return (
     <Card
           sx={{
