@@ -1,7 +1,6 @@
-// carousel component
-//@ts-ignore
+//@ts-expect-error - react-slick is not typed
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CircularProgress, Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import "slick-carousel/slick/slick.css";
@@ -16,7 +15,10 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   const { artworkSlug } = useParams();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const artworks: ExhibitionArtwork[] = exhibition?.artworks ?? [];
+  const artworks = useMemo<ExhibitionArtwork[]>(
+    () => exhibition?.artworks ?? [],
+    [exhibition?.artworks]
+  );
 
   // Sync slider position to URL slug on load / artwork list change
   useEffect(() => {

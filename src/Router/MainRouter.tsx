@@ -32,8 +32,8 @@ function MainRouter() {
         <Routes>
           <Route index element={import.meta.env.VITE_ENVIRONMENT === "private" ? <Gallery /> : <Home />} />
           <Route path="/exhibitions" element={<Gallery />} /> // Gallery component is a gateway point to exhibitions
-          {exhibitions?.map((exhibition: Exhibition, index: any) => (
-            <Route key={index} path={`/${exhibition.slug}`}>
+          {exhibitions?.map((exhibition: Exhibition) => (
+            <Route key={exhibition.slug} path={`/${exhibition.slug}`}>
               <Route index element={<ExhibitionPage exhibition={exhibition} />} />
               <Route path=":id" element={<ExhibitionPage exhibition={exhibition} />} />
             </Route>

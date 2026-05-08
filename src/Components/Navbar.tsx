@@ -1,4 +1,3 @@
-// @ts-ignore
 import "@fontsource/poppins/200.css"
 import React from "react";
 import { useNavigate, useLocation } from "react-router";
