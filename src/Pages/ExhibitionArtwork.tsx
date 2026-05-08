@@ -32,8 +32,11 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
 
   const open = openProp !== undefined ? openProp : !!id && !!artwork; 
 
+  // const handleClose = () => {
+  //   onCloseProp ? onCloseProp() : navigate(parentPath); 
+  // };
   const handleClose = () => {
-    onCloseProp ? onCloseProp() : navigate(parentPath); 
+    void (onCloseProp ? onCloseProp() : navigate(parentPath));
   };
 
   return (

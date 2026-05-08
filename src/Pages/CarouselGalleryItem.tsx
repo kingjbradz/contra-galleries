@@ -12,10 +12,10 @@ interface CarouselGalleryItemProps {
 const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
   artwork,
 }) => {
+  const [open, setOpen] = useState(false);
   if (!artwork) {
     return <Typography variant="h6">No artwork selected</Typography>; // Handle undefined artwork safely
   }
-  const [open, setOpen] = useState(false);
 
   const coverImage =
     artwork.artwork_images?.find((img) => img.is_cover)?.url ??
