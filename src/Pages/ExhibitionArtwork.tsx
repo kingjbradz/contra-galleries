@@ -78,7 +78,7 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
           <Box
             sx={{
               display: "grid",
-              // gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+              height: "100%", // this allows the image to take full height
               minHeight: 480,
             }}
           >
@@ -88,7 +88,11 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
                 position: "relative",
                 minHeight: { xs: 260, sm: "auto" },
                 overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end"
               }}
+              
             >
               <Box
                 component="img"
@@ -103,7 +107,7 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
                   filter: "brightness(0.9) contrast(1.05)",
                 }}
               />
-              <Box
+              {/* <Box
                 sx={{
                   display: { xs: "none", sm: "block" },
                   position: "absolute",
@@ -111,20 +115,28 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
                   background:
                     "linear-gradient(to right, transparent 60%, #111110 100%)",
                 }}
-              />
-            </Box>
-
+              /> */}
             {/* Info side */}
-            <Box>
+            <Box sx={{
+                  position: "fixed",
+                  background: "black",
+                  padding: "8px",
+                  marginBottom: "8px",
+                  borderRadius: "8px"
+            }}>
               <Typography>{artwork.material}</Typography>
 
               <Typography>{artwork.title}</Typography>
 
               <Typography>{artwork.artist}</Typography>
 
-              <Box />
+              <Typography>{artwork.year}</Typography>
 
-              <Box sx={{ display: "flex", gap: 4, mb: 3.5 }}>
+              <Typography>{artwork.dimensions}</Typography>
+
+              <Box />
+{/* 
+              <Box sx={{ display: "flex", gap: 4 }}>
                 <Box>
                   <Typography>Year</Typography>
                   <Typography>{artwork.year}</Typography>
@@ -133,10 +145,12 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
                   <Typography>Medium</Typography>
                   <Typography>{artwork.dimensions}</Typography>
                 </Box>
-              </Box>
+              </Box> */}
 
               <Typography>{artwork.info}</Typography>
             </Box>
+            </Box>
+
           </Box>
         )}
       </DialogContent>
