@@ -5,8 +5,7 @@ const getEnvironmentHeaders = () => {
   const parts = hostname.split('.');
   let environment = import.meta.env.VITE_ENVIRONMENT; // Default
   const apiKey = import.meta.env.VITE_INTERNAL_SECRET_KEY;
-
-  // Determine Environment
+  
   // Logic: if it's "onsite.domain.com", environment is "onsite"
   if (parts.length >= 3 && parts[0] !== 'www') {
     environment = parts[0];
@@ -21,7 +20,9 @@ const getEnvironmentHeaders = () => {
 
 export const fetchExhibitions = async () => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/exhibitions`, {
+    const response = await fetch(
+       `${import.meta.env.VITE_API_URL}/exhibitions`
+      , {
       method: 'GET',
       headers: getEnvironmentHeaders(),
     });
