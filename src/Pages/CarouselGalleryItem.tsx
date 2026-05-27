@@ -63,7 +63,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
         onClose={() => setOpen(false)}
         parentPath=""
         artwork={{
-          image: artwork.artwork_images[0].url,
+          artwork_images: artwork.artwork_images,
           title: artwork.title ?? "Untitled",
           artist: artwork.artist_name ?? "Unknown Artist",
           year: artwork.year ?? 0,
