@@ -7,9 +7,10 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import ArtworkCarousel from "./ArtworkCarousel";
+import { ArtworkImage } from "../utils/global-types";
 
 interface ArtworkDetails {
-  image?: string;
   title?: string;
   artist?: string;
   year?: number | string;
@@ -17,6 +18,7 @@ interface ArtworkDetails {
   dimensions?: string;
   info?: string;
   slug?: string;
+  artwork_images?: ArtworkImage[];
 }
 
 interface ExhibitionArtworkProps {
@@ -26,15 +28,16 @@ interface ExhibitionArtworkProps {
   onClose?: () => void;
 }
 
-const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onCloseProp }: ExhibitionArtworkProps) => {
+const ExhibitionArtwork = ({
+  artwork,
+  parentPath,
+  open: openProp,
+  onClose: onCloseProp,
+}: ExhibitionArtworkProps) => {
+  console.log("artwork in ExhibitionArtwork is", artwork);
   const navigate = useNavigate();
   const { id } = useParams();
-
-  const open = openProp !== undefined ? openProp : !!id && !!artwork; 
-
-  // const handleClose = () => {
-  //   onCloseProp ? onCloseProp() : navigate(parentPath); 
-  // };
+  const open = openProp !== undefined ? openProp : !!id && !!artwork;
   const handleClose = () => {
     void (onCloseProp ? onCloseProp() : navigate(parentPath));
   };
@@ -54,6 +57,7 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
             borderRadius: "2px",
             overflow: "hidden",
             boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
+            height: "calc(100% - 64px)",
           },
         },
       }}
@@ -65,9 +69,7 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
           position: "absolute",
           top: 16,
           right: 16,
-          color: "rgba(240,236,227,0.4)",
           zIndex: 10,
-          "&:hover": { color: "#f0ece3", bgcolor: "rgba(255,255,255,0.05)" },
         }}
       >
         <CloseIcon fontSize="small" />
@@ -78,64 +80,42 @@ const ExhibitionArtwork = ({ artwork, parentPath, open: openProp, onClose: onClo
           <Box
             sx={{
               display: "grid",
-              // gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+              height: "100%", // this allows the image to take full height
               minHeight: 480,
             }}
           >
-            {/* Image side */}
             <Box
               sx={{
                 position: "relative",
                 minHeight: { xs: 260, sm: "auto" },
                 overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
               }}
             >
-              <Box
-                component="img"
-                src={artwork.image}
-                alt={artwork.title}
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "brightness(0.9) contrast(1.05)",
-                }}
+              <ArtworkCarousel
+                images={artwork?.artwork_images}
+                title={artwork?.title}
               />
+              {/* Info side */}
               <Box
                 sx={{
-                  display: { xs: "none", sm: "block" },
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(to right, transparent 60%, #111110 100%)",
+                  position: "fixed",
+                  background: "black",
+                  padding: artwork?.artwork_images!.length > 1 ? "8px 8px 16px 8px" : "8px",
+                  marginBottom: "8px",
+                  borderRadius: "8px",
                 }}
-              />
-            </Box>
-
-            {/* Info side */}
-            <Box>
-              <Typography>{artwork.material}</Typography>
-
-              <Typography>{artwork.title}</Typography>
-
-              <Typography>{artwork.artist}</Typography>
-
-              <Box />
-
-              <Box sx={{ display: "flex", gap: 4, mb: 3.5 }}>
-                <Box>
-                  <Typography>Year</Typography>
-                  <Typography>{artwork.year}</Typography>
-                </Box>
-                <Box>
-                  <Typography>Medium</Typography>
-                  <Typography>{artwork.dimensions}</Typography>
-                </Box>
+              >
+                <Typography>{artwork.material}</Typography>
+                <Typography>{artwork.title}</Typography>
+                <Typography>{artwork.artist}</Typography>
+                <Typography>{artwork.year}</Typography>
+                <Typography>{artwork.dimensions}</Typography>
+                <Typography>{artwork.info}</Typography>
+                <Box />
               </Box>
-
-              <Typography>{artwork.info}</Typography>
             </Box>
           </Box>
         )}
