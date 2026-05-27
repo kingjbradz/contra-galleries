@@ -49,16 +49,18 @@ const ExhibitionPage = ({ exhibition }: { exhibition: Exhibition }) => {
       <ExhibitionArtwork
         artwork={
           selectedArtwork
-            ? {
-                image: selectedArtwork.artwork_images[0].url,
-                title: selectedArtwork.title ?? "Untitled",
-                artist: selectedArtwork.artist_name ?? "Unknown Artist",
-                year: selectedArtwork.year ?? 0,
-                material: selectedArtwork.material ?? "",
-                dimensions: selectedArtwork.dimensions ?? "",
-                info: selectedArtwork.info ?? "",
-                slug: selectedArtwork.slug ?? "",
-              }
+            // ? {
+            //     image: selectedArtwork.artwork_images[0].url,
+            //     title: selectedArtwork.title ?? "Untitled",
+            //     artist: selectedArtwork.artist_name ?? "Unknown Artist",
+            //     year: selectedArtwork.year ?? 0,
+            //     material: selectedArtwork.material ?? "",
+            //     dimensions: selectedArtwork.dimensions ?? "",
+            //     info: selectedArtwork.info ?? "",
+            //     slug: selectedArtwork.slug ?? "",
+            //     artwork_images: selectedArtwork.images ?? []
+            //   }
+             ? selectedArtwork
             : null
         }
         parentPath={parentPath}
