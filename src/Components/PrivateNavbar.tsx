@@ -59,7 +59,7 @@ const PrivateNavbar: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         flexShrink: "0",
-        height: "72px",
+        height: "93px",
       }}
     >
       <CssBaseline />
