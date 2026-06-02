@@ -46,7 +46,6 @@ const ExhibitionArtwork = ({
     <Dialog
       open={open}
       onClose={handleClose}
-      // TransitionComponent={SlideUp}
       fullWidth
       maxWidth="md"
       slotProps={{
@@ -67,9 +66,13 @@ const ExhibitionArtwork = ({
         size="small"
         sx={{
           position: "absolute",
-          top: 16,
-          right: 16,
+          top: 8,
+          right: 8,
           zIndex: 10,
+          bgcolor: "rgba(0,0,0,0.5)", color: "#fff",
+          "&:hover": {
+            bgcolor: "rgba(0,0,0,0.5)"
+          }
         }}
       >
         <CloseIcon fontSize="small" />
