@@ -14,7 +14,7 @@ const Footer = () => {
         alignItems: "center",
         flexShrink: "0",
         marginBottom: 1,
-        marginTop: 2,
+        marginTop: 1,
         fontSize: isMD ? "12px" : "8px",
       }}
     >

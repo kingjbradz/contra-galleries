@@ -116,7 +116,7 @@ export default function ArtworkCarousel({ images = [], title }: ArtworkCarouselP
 
           <Box
             sx={{
-              position: "absolute", top: 8, right: 8,
+              position: "absolute", top: 8, left: 8,
               bgcolor: "rgba(0,0,0,0.5)", color: "#fff",
               fontSize: "11px", fontFamily: "monospace",
               px: "6px", py: "2px", borderRadius: "4px",
