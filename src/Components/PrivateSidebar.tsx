@@ -49,22 +49,12 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
           width: drawerWidth,
           overflowX: "hidden",
           bgcolor: "common.black",
+          justifyContent: "space-between"
         },
       }}
       sx={{ width: drawerWidth, flexShrink: 0, marginRight: "5px" }}
     >
-      <Box>
-        <IconButton
-          onClick={() => setSidebarOpen(false)}
-          sx={{
-            color: "common.white",
-            marginRight: 1,
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", marginTop: 1 }}>
         {isLoading ? "" :
         navItems.map(({ text, path }) => (
           <Button
@@ -81,6 +71,17 @@ const PrivateSidebar: React.FC<SidebarProps> = ({
             {text}
           </Button>
         ))}
+      </Box>
+      <Box>
+        <IconButton
+          onClick={() => setSidebarOpen(false)}
+          sx={{
+            color: "common.white",
+            marginRight: 1,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
       </Box>
     </Drawer>
   );

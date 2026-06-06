@@ -23,6 +23,7 @@ interface NavItem {
 
 const staticNavItems: NavItem[] = [
   { text: "Main Website", path: "https://contragalleries.com" },
+  { text: "Home", path: "/" },
 ];
 
 const PrivateNavbar: React.FC = () => {
