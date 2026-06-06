@@ -34,7 +34,7 @@ function CarouselRouter() {
         {exhibitions?.map((exhibition: Exhibition) => (
           <Route key={exhibition.slug} path={`/${exhibition.slug}`}>
             <Route index element={<CarouselGalleryCont exhibition={exhibition} />} />
-            <Route path={`/${exhibition.slug}/:id`} element={<CarouselGalleryCont exhibition={exhibition} />} />
+            <Route path={`:artworkSlug`} element={<CarouselGalleryCont exhibition={exhibition} />} />
           </Route>
         ))}
       <Route path="/maintenance" element={<Maintenance />} />
