@@ -10,6 +10,9 @@ import LazyImage from "../Components/LazyImage";
 import { Exhibition, ExhibitionArtwork } from "../utils/global-types";
 
 const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [slideHeight, setSlideHeight] = useState<number>(320);
+  const SPACING = 60; // your liminal spacing in px
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
   const { artworkSlug } = useParams();
@@ -19,6 +22,19 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
     () => exhibition?.artworks ?? [],
     [exhibition?.artworks]
   );
+
+
+useEffect(() => {
+  const updateHeight = () => {
+    if (containerRef.current) {
+      setSlideHeight(containerRef.current.clientHeight - SPACING);
+    }
+  };
+
+  updateHeight();
+  window.addEventListener("resize", updateHeight);
+  return () => window.removeEventListener("resize", updateHeight);
+}, []);
 
   // Sync slider position to URL slug on load / artwork list change
   useEffect(() => {
@@ -61,7 +77,7 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: true,
-    arrows: true,
+    arrows: false,
     afterChange: handleSlideChange,
     customPaging: (i: number) => (
       <div>
@@ -96,10 +112,12 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
 
   return (
     <Box
+    ref={containerRef}
       className="slider-container"
       sx={{
         textAlign: "center",
-        // paddingTop: 1,
+        height: "100%",
+        flexGrow: 1,
         width: "100%",
         "& .slick-slider": {
           height: "100%",
@@ -123,9 +141,9 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
         },
       }}
     >
-      <Slider ref={sliderRef} {...settings}>
+      <Slider ref={sliderRef} {...settings} arrows={false}>
         {artworks.map((artwork) => (
-          <CarouselGalleryItem key={artwork.slug} artwork={artwork} />
+          <CarouselGalleryItem key={artwork.slug} artwork={artwork} itemHeight={slideHeight} />
         ))}
       </Slider>
     </Box>
