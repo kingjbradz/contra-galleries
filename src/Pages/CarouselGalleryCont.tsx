@@ -12,6 +12,7 @@ import { Exhibition, ExhibitionArtwork } from "../utils/global-types";
 const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [slideHeight, setSlideHeight] = useState<number>(320);
+  const [slideWidth, setSlideWidth] = useState<number>(320);
   const SPACING = 60; // your liminal spacing in px
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
@@ -29,28 +30,18 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   
     const observer = new ResizeObserver(([entry]) => {
       setSlideHeight(entry.contentRect.height - SPACING);
+      setSlideWidth(entry.contentRect.width - SPACING);
     });
   
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
 
-  // Sync slider position to URL slug on load / artwork list change
-  useEffect(() => {
-    if (artworkSlug && artworks.length) {
-      const index = artworks.findIndex((artwork) => artwork.slug === artworkSlug);
-      if (index !== -1) {
-        setActiveIndex(index);
-        sliderRef.current?.slickGoTo(index);
-      }
-    }
-  }, [artworkSlug, artworks]);
-
-  // Reset slider when the exhibition itself changes
-  useEffect(() => {
-    setActiveIndex(0);
-    sliderRef.current?.slickGoTo(0, false);
-  }, [exhibition?.slug]);
+  const initialSlide = useMemo(() => {
+    if (!artworkSlug || !artworks.length) return 0;
+    const index = artworks.findIndex((a) => a.slug === artworkSlug);
+    return index !== -1 ? index : 0;
+  }, [artworks, artworkSlug]);
 
   // Update active index state and navigate to the new artwork's URL
   const handleSlideChange = (newIndex: number) => {
@@ -140,9 +131,9 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
         },
       }}
     >
-      <Slider ref={sliderRef} {...settings} arrows={false}>
+      <Slider ref={sliderRef} {...settings} arrows={false} initialSlide={initialSlide}>
         {artworks.map((artwork) => (
-          <CarouselGalleryItem key={artwork.slug} artwork={artwork} itemHeight={slideHeight} />
+          <CarouselGalleryItem key={artwork.slug} artwork={artwork} itemHeight={slideHeight} itemWidth={slideWidth} />
         ))}
       </Slider>
     </Box>

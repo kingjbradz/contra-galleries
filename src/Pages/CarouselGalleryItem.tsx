@@ -8,11 +8,13 @@ import BrushIcon from "@mui/icons-material/Brush";
 interface CarouselGalleryItemProps {
   artwork: ExhibitionArtworkProps | null;
   itemHeight: number;
+  itemWidth: number;
 }
 
 const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
   artwork,
   itemHeight,
+  itemWidth
 }) => {
   const [open, setOpen] = useState(false);
   if (!artwork) {
@@ -39,7 +41,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
         <OverlayCard
           onClick={() => setOpen(true)}
           image={coverImage}
-          width={320}
+          width={itemWidth}
           height={itemHeight}
           path={`${artwork?.slug}`}
           state={{ state: artwork }}
