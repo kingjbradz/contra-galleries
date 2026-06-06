@@ -99,7 +99,7 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
       className="slider-container"
       sx={{
         textAlign: "center",
-        paddingTop: 1,
+        // paddingTop: 1,
         width: "100%",
         "& .slick-slider": {
           height: "100%",
