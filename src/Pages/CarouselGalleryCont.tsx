@@ -12,6 +12,7 @@ import { Exhibition, ExhibitionArtwork } from "../utils/global-types";
 const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [slideHeight, setSlideHeight] = useState<number>(320);
+  const [slideWidth, setSlideWidth] = useState<number>(320);
   const SPACING = 60; // your liminal spacing in px
   const sliderRef = useRef<Slider | null>(null);
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   
     const observer = new ResizeObserver(([entry]) => {
       setSlideHeight(entry.contentRect.height - SPACING);
+      setSlideWidth(entry.contentRect.width - SPACING);
     });
   
     observer.observe(containerRef.current);
@@ -142,7 +144,7 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
     >
       <Slider ref={sliderRef} {...settings} arrows={false}>
         {artworks.map((artwork) => (
-          <CarouselGalleryItem key={artwork.slug} artwork={artwork} itemHeight={slideHeight} />
+          <CarouselGalleryItem key={artwork.slug} artwork={artwork} itemHeight={slideHeight} itemWidth={slideWidth} />
         ))}
       </Slider>
     </Box>
