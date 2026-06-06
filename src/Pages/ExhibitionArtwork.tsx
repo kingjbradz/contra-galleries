@@ -34,7 +34,6 @@ const ExhibitionArtwork = ({
   open: openProp,
   onClose: onCloseProp,
 }: ExhibitionArtworkProps) => {
-  console.log("artwork in ExhibitionArtwork is", artwork);
   const navigate = useNavigate();
   const { id } = useParams();
   const open = openProp !== undefined ? openProp : !!id && !!artwork;
