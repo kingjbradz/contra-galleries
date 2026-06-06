@@ -24,17 +24,16 @@ const CarouselGalleryCont = ({ exhibition }: { exhibition?: Exhibition }) => {
   );
 
 
-useEffect(() => {
-  const updateHeight = () => {
-    if (containerRef.current) {
-      setSlideHeight(containerRef.current.clientHeight - SPACING);
-    }
-  };
-
-  updateHeight();
-  window.addEventListener("resize", updateHeight);
-  return () => window.removeEventListener("resize", updateHeight);
-}, []);
+  useEffect(() => {
+    if (!containerRef.current) return;
+  
+    const observer = new ResizeObserver(([entry]) => {
+      setSlideHeight(entry.contentRect.height - SPACING);
+    });
+  
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Sync slider position to URL slug on load / artwork list change
   useEffect(() => {
