@@ -25,7 +25,7 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
     <>
       <Box
         key={artwork.artwork_id}
-        id="top"
+        id="cgi-top"
         sx={{
           display: "flex !important",
           flexDirection: "column",
@@ -48,15 +48,6 @@ const CarouselGalleryItem: React.FC<CarouselGalleryItemProps> = ({
               : "Unknown Artist"
           }
         />
-        <Box
-          sx={{
-            maxWidth: "500px",
-            textAlign: "center",
-            marginTop: 1,
-            width: "100%",
-          }}
-        >
-        </Box>
       </Box>
       <ExhibitionArtwork
         open={open}
