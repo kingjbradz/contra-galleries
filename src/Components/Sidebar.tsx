@@ -2,7 +2,6 @@ import React from "react";
 import { Location } from "react-router";
 import { Drawer, Button, Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import InstagramButton from "./InstagramButton";
 
 interface NavItem {
   text: string;
@@ -27,6 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   navigate,
 }) => {
   const drawerWidth = "240px";
+  const sidebarNavItems = [{ text: "home", path: "/" }, ...navItems]
 
   const handleMobileRoute = (v: string) => {
     if (v.includes("https")) {
@@ -48,26 +48,13 @@ const Sidebar: React.FC<SidebarProps> = ({
           width: drawerWidth,
           overflowX: "hidden",
           bgcolor: "common.black",
+          justifyContent: "space-between",
         },
       }}
       sx={{ width: drawerWidth, flexShrink: 0, marginRight: "5px" }}
     >
-      <Box>
-        <IconButton
-          onClick={() => setSidebarOpen(false)}
-          sx={{
-            color: "common.white",
-            marginRight: 1,
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Box>  
-       <InstagramButton marginLeft={0} />
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-        {navItems.map(({ text, path }) => (
+      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", marginTop: 1 }}>
+        {sidebarNavItems.map(({ text, path }) => (
           <Button
             key={text}
             onClick={() => handleMobileRoute(path)}
@@ -81,6 +68,17 @@ const Sidebar: React.FC<SidebarProps> = ({
             {text}
           </Button>
         ))}
+      </Box>
+      <Box>
+        <IconButton
+          onClick={() => setSidebarOpen(false)}
+          sx={{
+            color: "common.white",
+            marginRight: 1,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
       </Box>
     </Drawer>
   );
