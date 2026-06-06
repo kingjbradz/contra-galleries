@@ -101,7 +101,8 @@ const Navbar: React.FC = () => {
                   <MenuIcon />
                 </IconButton>
                 <Logo />
-                <Box></Box>
+                {/* <Box></Box> */}
+                <InstagramButton marginLeft={0} />
               <Sidebar
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
