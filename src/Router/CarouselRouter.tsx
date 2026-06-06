@@ -6,6 +6,7 @@ import { useExhibitions } from "../utils/api";
 import { Exhibition } from "../utils/global-types";
 import Gallery from "../Pages/Gallery";
 import Maintenance from "../Pages/Maintenance";
+import Contact from "../Pages/Contact";
 
 
 function CarouselRouter() {
@@ -38,6 +39,7 @@ function CarouselRouter() {
           </Route>
         ))}
       <Route path="/maintenance" element={<Maintenance />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/*" element={<App404 />} />
     </Routes>
   );
