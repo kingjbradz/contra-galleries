@@ -63,6 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               borderRadius: 0,
               justifyContent: "flex-start",
               paddingLeft: 2,
+              textAlign: "left"
             }}
           >
             {text}
