@@ -1,7 +1,3 @@
-// @ts-expect-error - fontsource is not typed
-import "@fontsource/michroma";
-//@ts-expect-error - fontsource is not typed
-import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import NavbarCont from "./Components/NavbarCont";
 import Footer from "./Components/Footer";
